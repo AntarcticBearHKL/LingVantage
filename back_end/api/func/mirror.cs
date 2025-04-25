@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 
 namespace BlabIt.Services;
 
-public class ContextAPI
+public class MirrorAPI
 {
     private readonly HttpClient _httpClient;
     private readonly string _apiKey;
@@ -18,7 +18,7 @@ public class ContextAPI
     ]
     """;
 
-    public ContextAPI()
+    public MirrorAPI()
     {
         _httpClient = new HttpClient();
         _apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") 

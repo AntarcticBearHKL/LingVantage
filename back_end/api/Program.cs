@@ -23,35 +23,54 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("AllowAll");
 
-//app.UseHttpsRedirection();
-
-app.MapGet("/b", () => "Response from /b");
-app.MapGet("/c", () => "Response from /c");
-
 app.MapGet("/context", async (string message) =>
 {
-    Console.WriteLine("Transcribe endpoint hitssss");
     try
     {
-        var openAiService = new OpenAIService();
+        var openAiService = new ContextAPI();
         var response = await openAiService.GetCompletionAsync(message);
         return Results.Ok(new { response = response });
     }
     catch (Exception ex)
     {
-        Console.WriteLine(ex.Message);
+        return Results.Problem(ex.Message);
+    }
+});
+
+app.MapGet("/enchanter", async (string message) =>
+{
+    try
+    {
+        var openAiService = new EnchanterAPI();
+        var response = await openAiService.GetCompletionAsync(message);
+        return Results.Ok(new { response = response });
+    }
+    catch (Exception ex)
+    {
+        return Results.Problem(ex.Message);
+    }
+});
+
+app.MapGet("/mirror", async (string message) =>
+{
+    try
+    {
+        var openAiService = new MirrorAPI();
+        var response = await openAiService.GetCompletionAsync(message);
+        return Results.Ok(new { response = response });
+    }
+    catch (Exception ex)
+    {
         return Results.Problem(ex.Message);
     }
 });
 
 app.MapPost("/transcribe", async (HttpContext context) =>
 {
-    Console.WriteLine("Transcribe endpoint hit");
     try
     {
         if (!context.Request.HasFormContentType)
         {
-            //Console.WriteLine("1");
             return Results.BadRequest("Request must be multipart/form-data");
         }
 
@@ -60,11 +79,9 @@ app.MapPost("/transcribe", async (HttpContext context) =>
         
         if (file == null)
         {
-            //Console.WriteLine("2");
             return Results.BadRequest("No audio file provided");
         }
 
-        Console.WriteLine("Transcribe endpoint hit 2");
 
         var transcribeService = new TranscribeService();
         var transcription = await transcribeService.TranscribeAudioAsync(file);
@@ -73,7 +90,6 @@ app.MapPost("/transcribe", async (HttpContext context) =>
     }
     catch (Exception ex)
     {
-        Console.WriteLine(ex.Message);
         return Results.Problem(ex.Message);
     }
 });
