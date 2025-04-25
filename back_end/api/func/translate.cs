@@ -16,11 +16,10 @@ namespace BlabIt.func
         /// <param name="responseStream">The stream to write the response to.</param>
         public static async Task TranslateTextStreamAsync(Stream responseStream)
         {
-            // OpenAI API URL
+
             var apiUrl = "https://api.openai.com/v1/chat/completions";
 
-            // OpenAI API Key (replace with your actual key)
-            var apiKey = "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";
+            var apiKey = "";
 
             // Request payload
             var requestBody = new
