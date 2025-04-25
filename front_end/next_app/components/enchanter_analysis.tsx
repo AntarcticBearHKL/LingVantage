@@ -14,7 +14,7 @@ const EnchanterAnalysis = () => {
   useEffect(() => {
     const sendDataToServer = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5000/context?message=${encodeURIComponent(someData)}`, {
+        const response = await fetch(`https://blabit:5000/enchanter?message=${encodeURIComponent(someData)}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
