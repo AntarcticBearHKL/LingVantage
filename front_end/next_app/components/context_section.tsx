@@ -24,12 +24,13 @@ const ContextSection = () => {
       });
 
       if (!response.ok) {
-        alert(response.ok)
         throw new Error('Upload failed');
       }
 
       const data = await response.json();
       console.log('Upload successful:', data);
+      alert(data); // 显示转录结果
+
     } catch (error) {
       console.error('Error uploading audio:', error);
     } finally {
