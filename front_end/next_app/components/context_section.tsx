@@ -3,11 +3,18 @@
 import { useRouter } from "next/navigation"; // 导入 useRouter
 import { useState } from 'react';
 import { useAudioRecorder } from "./audio_recorder"; // 导入自定义的音频录制器
+import { setSpeechText } from '@/store/slices/speechSlice'
+import { RootState } from '../store'; // 导入 Redux store 的类型
+
+import { useDispatch, useSelector } from 'react-redux'
 
 const ContextSection = () => {
   const router = useRouter(); // 初始化 useRouter
   const { isRecording, audioBlob, startRecording, stopRecording } = useAudioRecorder();
   const [isUploading, setIsUploading] = useState(false);
+
+  const dispatch = useDispatch()
+  const speechText = useSelector((state: RootState) => state.speech.speechText)
 
   const handleMouseDown = () => {
     startRecording();
@@ -42,6 +49,7 @@ const ContextSection = () => {
       const data = await response.json();
       console.log('Upload successful:', data);
       
+      dispatch(setSpeechText(data.text)); // 更新 Redux store 中的文本
       router.push('/context'); // 上传成功后跳转到结果页面
 
     } catch (error) {

@@ -5,7 +5,7 @@ interface SpeechState {
 }
 
 const initialState: SpeechState = {
-  speechText: '',  // 初始状态为空字符串
+  speechText: 'None',  // 初始状态为空字符串
 };
 
 export const speechSlice = createSlice({
@@ -18,3 +18,5 @@ export const speechSlice = createSlice({
     },
   },
 });
+
+export const { setSpeechText } = speechSlice.actions;

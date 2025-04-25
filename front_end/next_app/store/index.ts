@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import {speechSlice} from './slices/speechSlice';
+import { speechSlice } from './slices/speechSlice';
 
 export const store = configureStore({
   reducer: {

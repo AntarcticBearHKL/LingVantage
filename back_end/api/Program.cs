@@ -1,4 +1,3 @@
-using BlabIt.func;
 using BlabIt.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,13 +25,24 @@ app.UseCors("AllowAll");
 
 //app.UseHttpsRedirection();
 
-app.MapGet("/a",  async (HttpContext context) =>
-{
-    context.Response.ContentType = "text/plain"; // 设置响应类型
-    await Translate.TranslateTextStreamAsync(context.Response.Body);
-});
 app.MapGet("/b", () => "Response from /b");
 app.MapGet("/c", () => "Response from /c");
+
+app.MapGet("/context", async (string message) =>
+{
+    Console.WriteLine("Transcribe endpoint hitssss");
+    try
+    {
+        var openAiService = new OpenAIService();
+        var response = await openAiService.GetCompletionAsync(message);
+        return Results.Ok(new { response = response });
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+        return Results.Problem(ex.Message);
+    }
+});
 
 app.MapPost("/transcribe", async (HttpContext context) =>
 {
