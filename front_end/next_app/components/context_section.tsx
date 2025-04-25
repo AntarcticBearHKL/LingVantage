@@ -1,7 +1,10 @@
 "use client";
 
 import { useRouter } from "next/navigation"; // 导入 useRouter
-import { ReactMediaRecorder } from "react-media-recorder";
+import dynamic from "next/dynamic";
+const ReactMediaRecorder = dynamic(() => import('react-media-recorder').then((mod) => mod.ReactMediaRecorder), {
+  ssr: false,
+});
 
 const ContextSection = () => {
   const router = useRouter(); // 初始化 useRouter
