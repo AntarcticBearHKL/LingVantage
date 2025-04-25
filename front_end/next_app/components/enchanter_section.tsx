@@ -62,11 +62,11 @@ const EnchanterSection = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
       <h1 className="text-4xl font-bold text-gray-800 mb-6">
-        这是一个标题
+      The English Enhancement Enchanter
       </h1>
 
       <p className="text-lg text-gray-600 mb-8 max-w-2xl text-center">
-        按住按钮开始录音，松开按钮自动上传
+      Your words are precious gems that deserve to shine their brightest. Let us polish them to perfection, revealing their true native brilliance. Grammar, vocabulary, and structure blend together in harmony, as we craft expressions that flow as smoothly as a mountain stream.
       </p>
 
       <div className="flex flex-col items-center gap-4">
@@ -80,12 +80,12 @@ const EnchanterSection = () => {
               : 'bg-blue-500 hover:bg-blue-600'
           } text-white transition`}
         >
-          {isRecording ? '录音中...' : '按住录音'}
+          {isRecording ? 'RECORDING...' : 'EXPRESS YOUR TRUE FEELINGS'}
         </button>
 
         {isUploading && (
           <div className="text-gray-600">
-            上传中...
+            LOADING...
           </div>
         )}
       </div>

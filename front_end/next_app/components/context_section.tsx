@@ -62,11 +62,11 @@ const ContextSection = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
       <h1 className="text-4xl font-bold text-gray-800 mb-6">
-        这是一个标题
+      The Context Whisperer
       </h1>
 
       <p className="text-lg text-gray-600 mb-8 max-w-2xl text-center">
-        按住按钮开始录音，松开按钮自动上传
+      Like a gentle breeze carrying the first words of spring, our context generator crafts the perfect opening lines for your conversations. It weaves together phrases and translations, helping you step confidently into any dialogue, as naturally as dawn breaks over the horizon.
       </p>
 
       <div className="flex flex-col items-center gap-4">
@@ -80,12 +80,12 @@ const ContextSection = () => {
               : 'bg-blue-500 hover:bg-blue-600'
           } text-white transition`}
         >
-          {isRecording ? '录音中...' : '按住录音'}
+          {isRecording ? 'RECORDING...' : 'DESCRIBE A CONTEXT'}
         </button>
 
         {isUploading && (
           <div className="text-gray-600">
-            上传中...
+            LOADING...
           </div>
         )}
       </div>

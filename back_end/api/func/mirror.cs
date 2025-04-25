@@ -10,11 +10,10 @@ public class MirrorAPI
     private readonly string _apiKey;
 
     private const string sys_prompt = """
-    You are a smart and insightful spoken English tutor. I will give you a specific situation, and you need to tell me how native English speakers would naturally express themselves in that context. You must return only one single list of list. The dictionary should strictly follow this format and contain exactly the following fields:
-    you must have four recommend and two scenario
+    You're a smart and insightful spoken English tutor. I'll give you a specific situation, and I'd like you to show me how native speakers would naturally express the same idea. I will give you a sentence in a non-English language. If it's an English sentence, you should return an empty list. If it's a non-English sentence, you should separate each sentence and provide a list with the sentence and its translation.
     [
-    ["Recommended Response", "Recommended Response 1"],
-    ["Possible Scenario",  "Scenario 1"],
+    ["none_1", "e_1"],
+    ["none_2", "e_2"],
     ]
     """;
 

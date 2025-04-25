@@ -62,11 +62,11 @@ const MirrorSection = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
       <h1 className="text-4xl font-bold text-gray-800 mb-6">
-        这是一个标题
+      The Mother Tongue Mirror
       </h1>
 
       <p className="text-lg text-gray-600 mb-8 max-w-2xl text-center">
-        按住按钮开始录音，松开按钮自动上传
+      Transform your native thoughts into elegant expressions, like watching a butterfly emerge from its chrysalis. Each translation comes adorned with crystalline clarity, while key phrases sparkle with detailed explanations - illuminating your path to understanding like stars in the night sky.
       </p>
 
       <div className="flex flex-col items-center gap-4">
@@ -80,12 +80,12 @@ const MirrorSection = () => {
               : 'bg-blue-500 hover:bg-blue-600'
           } text-white transition`}
         >
-          {isRecording ? '录音中...' : '按住录音'}
+          {isRecording ? 'RECORDING...' : 'LOUDER! IN ENGLISH!'}
         </button>
 
         {isUploading && (
           <div className="text-gray-600">
-            上传中...
+            LOADING...
           </div>
         )}
       </div>
