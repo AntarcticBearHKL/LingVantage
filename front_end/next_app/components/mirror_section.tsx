@@ -14,7 +14,6 @@ const MirrorSection = () => {
   const [isUploading, setIsUploading] = useState(false);
 
   const dispatch = useDispatch()
-  const speechText = useSelector((state: RootState) => state.speech.speechText)
 
   const handleMouseDown = () => {
     startRecording();

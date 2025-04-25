@@ -1,6 +1,6 @@
 "use client";
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { RootState } from '../store'; // 导入 Redux store 的类型
 import { useEffect, useState } from 'react';
 
@@ -9,7 +9,6 @@ const MirrorAnalysis = () => {
   const someData = useSelector((state: RootState) => state.speech.speechText); // 从 Redux store 中获取数据
 
   const [responses, setResponses] = useState<[string, string][]>([]);
-
 
   useEffect(() => {
     const sendDataToServer = async () => {

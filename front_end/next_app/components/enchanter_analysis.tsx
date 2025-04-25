@@ -1,6 +1,6 @@
 "use client";
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { RootState } from '../store'; // 导入 Redux store 的类型
 import { useEffect, useState } from 'react';
 

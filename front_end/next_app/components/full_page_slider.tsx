@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useSwipeable } from "react-swipeable";
-import { Drawer, Dropdown, Space } from "antd";
+import { Drawer, Dropdown } from "antd";
 import type { MenuProps } from "antd";
 
 import ContextSection from "./context_section";

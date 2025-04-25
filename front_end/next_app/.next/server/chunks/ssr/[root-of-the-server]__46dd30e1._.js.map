@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 39, "column": 0}, "map": {"version":3,"sources":["file://D%3A/BlabIt/front_end/next_app/app/page.tsx"],"sourcesContent":["\"use client\"\n\nimport Link from 'next/link'\nimport FullPageSlider from \"../components/fp\";\nimport ContextAnalysis from \"../components/context_analysis\";\n\nexport default function Home() {\n  return (\n    <nav>\n      <Link href=\"/\">\n        \n      </Link>\n      <Link href=\"/context_analysis\"></Link>\n    </nav>\n  )\n}"],"names":[],"mappings":";;;;AAEA;AAFA;;;AAMe,SAAS;IACtB,qBACE,8OAAC;;0BACC,8OAAC,4JAAA,CAAA,UAAI;gBAAC,MAAK;;;;;;0BAGX,8OAAC,4JAAA,CAAA,UAAI;gBAAC,MAAK;;;;;;;;;;;;AAGjB","debugId":null}}]
-}
