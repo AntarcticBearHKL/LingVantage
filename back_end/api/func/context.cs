@@ -9,6 +9,15 @@ public class OpenAIService
     private readonly HttpClient _httpClient;
     private readonly string _apiKey;
 
+    private const string sys_prompt = """
+    You are a smart and insightful spoken English tutor. I will give you a specific situation, and you need to tell me how native English speakers would naturally express themselves in that context. You must return only one single list of list. The dictionary should strictly follow this format and contain exactly the following fields:
+    you must have four recommend and two scenario
+    [
+    ["Recommended Response", "Recommended Response 1"],
+    ["Possible Scenario",  "Scenario 1"],
+    ]
+    """;
+
     public OpenAIService()
     {
         _httpClient = new HttpClient();
@@ -25,6 +34,7 @@ public class OpenAIService
             model = "gpt-4.1",
             messages = new[]
             {
+                new { role = "system", content = sys_prompt },
                 new { role = "user", content = prompt }
             }
         };

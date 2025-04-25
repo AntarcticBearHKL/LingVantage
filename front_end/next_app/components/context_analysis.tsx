@@ -2,13 +2,14 @@
 
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../store'; // 导入 Redux store 的类型
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 
 const ContextAnalysis = () => {
   const someData = useSelector((state: RootState) => state.speech.speechText); // 从 Redux store 中获取数据
 
-  const dispatch = useDispatch()
+  const [responses, setResponses] = useState<[string, string][]>([]);
+
 
   useEffect(() => {
     const sendDataToServer = async () => {
@@ -25,7 +26,11 @@ const ContextAnalysis = () => {
         }
         
         const data = await response.json();
-        console.log('Server response:', data);
+        
+        setResponses(JSON.parse(data.response));
+  
+        console.log('Server response:', responses);
+
       } catch (error) {
         console.error('Error sending data:', error);
       }
@@ -34,13 +39,21 @@ const ContextAnalysis = () => {
     if (someData) {
       sendDataToServer();
     }
-  }, [someData]);
+  }, []);
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-gray-100">
+    <div className="w-screen h-screen flex flex-col justify-center items-center bg-gray-100">
       <h1 className="text-2xl font-bold text-gray-800">
         {someData}
       </h1>
+
+      {responses.map((response, index) => (
+        <div key={index} className="flex flex-col p-4 bg-white rounded-lg shadow mb-2 w-full max-w-2xl">
+          <p>问题: {response[0]}</p>
+          <p>回答: {response[1]}</p>
+        </div>
+      ))}
+
     </div>
   );
 };
