@@ -1,9 +1,10 @@
-import FullPageSlider from "../components/fp";
+"use client"
+
+import FullPageSlider from "../components/full_page_slider";
 
 export default function Home() {
+
   return (
-    <div className="flex items-center justify-center">
-      <FullPageSlider />
-    </div>
+    <FullPageSlider />
   );
 }

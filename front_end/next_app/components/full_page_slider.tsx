@@ -3,13 +3,15 @@
 import { useState } from "react";
 import { useSwipeable } from "react-swipeable";
 
+import ContextSection from "./context_section";
+
 const FullPageSlider = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   const pages = [
-    { id: 0, content: "Page 1 Content" },
-    { id: 1, content: "Page 2 Content" },
-    { id: 2, content: "Page 3 Content" },
+    { id: 0, content: <ContextSection /> },
+    { id: 1, content: <ContextSection /> },
+    { id: 2, content: <ContextSection /> },
   ];
 
   const handleSwipe = (direction:string) => {
@@ -45,18 +47,8 @@ const FullPageSlider = () => {
         }}
       >
         {pages.map((page) => (
-          <div
-            key={page.id}
-            style={{
-              flex: "0 0 100vw",
-              height: "100vh",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              background: `hsl(${page.id * 120}, 70%, 80%)`,
-            }}
-          >
-            <h1>{page.content}</h1>
+          <div key={page.id} className="min-h-screen w-screen">
+            {page.content}
           </div>
         ))}
       </div>
