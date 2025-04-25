@@ -14,7 +14,7 @@ const ContextAnalysis = () => {
   useEffect(() => {
     const sendDataToServer = async () => {
       try {
-        const response = await fetch(`https://blabit:5000/context?message=${encodeURIComponent(someData)}`, {
+        const response = await fetch(`https://blabit.xyz:5000/context?message=${encodeURIComponent(someData)}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ const ContextAnalysis = () => {
         const data = await response.json();
         
         setResponses(JSON.parse(data.response));
-  
+        
         console.log('Server response:', responses);
 
       } catch (error) {

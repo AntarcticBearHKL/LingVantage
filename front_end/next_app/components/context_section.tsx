@@ -15,17 +15,17 @@ const ContextSection = () => {
 
   const dispatch = useDispatch()
 
-  const handleMouseDown = () => {
-    startRecording();
-  };
-
-  const handleMouseUp = async () => {
-    await stopRecording();
-    // 等待 audioBlob 更新
-    setTimeout(async () => {
-      if (!audioBlob) return;
-      await handleUpload();
-    }, 100);
+  const handleButtonClick = async () => {
+    if (isRecording) {
+      await stopRecording();
+      // 等待 audioBlob 更新
+      setTimeout(async () => {
+        if (!audioBlob) return;
+        await handleUpload();
+      }, 100);
+    } else {
+      startRecording();
+    }
   };
 
   const handleUpload = async () => {
@@ -36,7 +36,7 @@ const ContextSection = () => {
       const formData = new FormData();
       formData.append('audio', audioBlob, 'recording.webm');
 
-      const response = await fetch('http://127.0.0.1:5000/transcribe', {
+      const response = await fetch('https://blabit.xyz:5000/transcribe', {
         method: 'POST',
         body: formData,
       });
@@ -61,25 +61,23 @@ const ContextSection = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
       <h1 className="text-4xl font-bold text-gray-800 mb-6">
-      The Context Whisperer
+        The Context Whisperer
       </h1>
 
       <p className="text-lg text-gray-600 mb-8 max-w-2xl text-center">
-      Like a gentle breeze carrying the first words of spring, our context generator crafts the perfect opening lines for your conversations. It weaves together phrases and translations, helping you step confidently into any dialogue, as naturally as dawn breaks over the horizon.
+        Like a gentle breeze carrying the first words of spring, our context generator crafts the perfect opening lines for your conversations. It weaves together phrases and translations, helping you step confidently into any dialogue, as naturally as dawn breaks over the horizon.
       </p>
 
       <div className="flex flex-col items-center gap-4">
         <button
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp} 
+          onClick={handleButtonClick}
           className={`px-6 py-3 rounded-lg font-semibold select-none ${
             isRecording 
               ? 'bg-red-500 hover:bg-red-600' 
               : 'bg-blue-500 hover:bg-blue-600'
           } text-white transition`}
         >
-          {isRecording ? 'RECORDING...' : 'DESCRIBE A CONTEXT'}
+          {isRecording ? 'STOP RECORDING' : 'START RECORDING'}
         </button>
 
         {isUploading && (

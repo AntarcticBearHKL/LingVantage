@@ -15,17 +15,17 @@ const MirrorSection = () => {
 
   const dispatch = useDispatch()
 
-  const handleMouseDown = () => {
-    startRecording();
-  };
-
-  const handleMouseUp = async () => {
-    await stopRecording();
-    // 等待 audioBlob 更新
-    setTimeout(async () => {
-      if (!audioBlob) return;
-      await handleUpload();
-    }, 100);
+  const handleButtonClick = async () => {
+    if (isRecording) {
+      await stopRecording();
+      // 等待 audioBlob 更新
+      setTimeout(async () => {
+        if (!audioBlob) return;
+        await handleUpload();
+      }, 100);
+    } else {
+      startRecording();
+    }
   };
 
   const handleUpload = async () => {
@@ -36,7 +36,7 @@ const MirrorSection = () => {
       const formData = new FormData();
       formData.append('audio', audioBlob, 'recording.webm');
 
-      const response = await fetch('http://127.0.0.1:5000/transcribe', {
+      const response = await fetch('https://blabit.xyz:5000/transcribe', {
         method: 'POST',
         body: formData,
       });
@@ -61,25 +61,23 @@ const MirrorSection = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
       <h1 className="text-4xl font-bold text-gray-800 mb-6">
-      The Mother Tongue Mirror
+        The Mother Tongue Mirror
       </h1>
 
       <p className="text-lg text-gray-600 mb-8 max-w-2xl text-center">
-      Transform your native thoughts into elegant expressions, like watching a butterfly emerge from its chrysalis. Each translation comes adorned with crystalline clarity, while key phrases sparkle with detailed explanations - illuminating your path to understanding like stars in the night sky.
+        Transform your native thoughts into elegant expressions, like watching a butterfly emerge from its chrysalis. Each translation comes adorned with crystalline clarity, while key phrases sparkle with detailed explanations - illuminating your path to understanding like stars in the night sky.
       </p>
 
       <div className="flex flex-col items-center gap-4">
         <button
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp} 
+          onClick={handleButtonClick}
           className={`px-6 py-3 rounded-lg font-semibold select-none ${
             isRecording 
               ? 'bg-red-500 hover:bg-red-600' 
               : 'bg-blue-500 hover:bg-blue-600'
           } text-white transition`}
         >
-          {isRecording ? 'RECORDING...' : 'LOUDER! IN ENGLISH!'}
+          {isRecording ? 'STOP RECORDING' : 'START RECORDING'}
         </button>
 
         {isUploading && (

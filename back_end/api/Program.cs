@@ -21,6 +21,9 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseStaticFiles();
+app.MapFallbackToFile("index.html");
+
 app.UseCors("AllowAll");
 
 app.MapGet("/context", async (string message) =>

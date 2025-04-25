@@ -15,13 +15,8 @@ public class EnchanterAPI
     Then, analyze the original version by pointing out any obvious word choice issues, grammar mistakes, or logic problems.
     Also, suggest more concise or native-like alternatives, or high-level vocabulary equivalent to an IELTS Band 9.
     Please return your response in the format of a list, following the order I've given below. Items may repeat.
-    [
-    ["idiomatic", "comment", None],
-    ["wordError", "original", "suggestion"], 
-    ["grammarError", "original", "suggestion"], 
-    ["logicError", "original", "suggestion"], 
-    ["wordChoice", "original", "suggestion"] 
-    ]
+    “[["idiomatic", "comment", None],["wordError", "original", "suggestion"], ["grammarError", "original", "suggestion"], ["logicError", "original", "suggestion"], ["wordChoice", "original", "suggestion"]]”
+    The returned translation should be a neatly formatted single line of text with no line breaks, and it must be directly formatted into a compact JSON string. Just one line!!!
     """;
 
     public EnchanterAPI()

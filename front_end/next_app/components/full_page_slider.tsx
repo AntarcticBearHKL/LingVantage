@@ -44,7 +44,7 @@ const FullPageSlider = () => {
   return (
     <div
       {...handlers}
-      style={{ display: "flex", width: "100vw", height: "100vh", overflow: "hidden", position: "relative", }}
+      style={{ display: "flex", width: "100vw", height: "100dvh", overflow: "hidden", position: "relative", }}
     >
       <div className="flex flex-row">
         <div style={{
