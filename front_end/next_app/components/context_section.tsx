@@ -18,12 +18,13 @@ const ContextSection = () => {
       const formData = new FormData();
       formData.append('audio', audioBlob, 'recording.webm');
 
-      const response = await fetch('/api/upload', {
+      const response = await fetch('http://127.0.0.1:5000/transcribe', {
         method: 'POST',
         body: formData,
       });
 
       if (!response.ok) {
+        alert(response.ok)
         throw new Error('Upload failed');
       }
 
