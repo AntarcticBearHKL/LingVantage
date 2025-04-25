@@ -1,5 +1,5 @@
-import ContextAnalysis from "@/components/context_analysis";
+import MirrorAnalysis from "@/components/mirror_analysis";
 
 export default function MirrorPage() {
-    return <ContextAnalysis />;
+    return <MirrorAnalysis />;
 }

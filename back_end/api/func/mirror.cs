@@ -12,8 +12,8 @@ public class MirrorAPI
     private const string sys_prompt = """
     You're a smart and insightful spoken English tutor. I'll give you a specific situation, and I'd like you to show me how native speakers would naturally express the same idea. I will give you a sentence in a non-English language. If it's an English sentence, you should return an empty list. If it's a non-English sentence, you should separate each sentence and provide a list with the sentence and its translation.
     [
-    ["none_1", "e_1"],
-    ["none_2", "e_2"],
+    ["non_e_1", "e_1"],
+    ["non_e_2", "e_2"],
     ]
     """;
 

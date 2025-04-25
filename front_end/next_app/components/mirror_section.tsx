@@ -50,7 +50,7 @@ const MirrorSection = () => {
       console.log('Upload successful:', data);
       
       dispatch(setSpeechText(data.text)); // 更新 Redux store 中的文本
-      router.push('/context'); // 上传成功后跳转到结果页面
+      router.push('/mirror'); // 上传成功后跳转到结果页面
 
     } catch (error) {
       console.error('Error uploading audio:', error);
