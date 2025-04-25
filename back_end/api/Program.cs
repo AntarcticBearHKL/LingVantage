@@ -41,7 +41,7 @@ app.MapPost("/transcribe", async (HttpContext context) =>
     {
         if (!context.Request.HasFormContentType)
         {
-            Console.WriteLine("1");
+            //Console.WriteLine("1");
             return Results.BadRequest("Request must be multipart/form-data");
         }
 
@@ -50,7 +50,7 @@ app.MapPost("/transcribe", async (HttpContext context) =>
         
         if (file == null)
         {
-            Console.WriteLine("2");
+            //Console.WriteLine("2");
             return Results.BadRequest("No audio file provided");
         }
 

@@ -41,7 +41,8 @@ const ContextSection = () => {
 
       const data = await response.json();
       console.log('Upload successful:', data);
-      alert(data.text);
+      
+      router.push('/context'); // 上传成功后跳转到结果页面
 
     } catch (error) {
       console.error('Error uploading audio:', error);
