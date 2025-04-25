@@ -1,13 +1,40 @@
 "use client";
 
 import { useRouter } from "next/navigation"; // 导入 useRouter
-import dynamic from "next/dynamic";
-const ReactMediaRecorder = dynamic(() => import('react-media-recorder').then((mod) => mod.ReactMediaRecorder), {
-  ssr: false,
-});
+import { useState } from 'react';
+import { useAudioRecorder } from "./audio_recorder"; // 导入自定义的音频录制器
 
 const ContextSection = () => {
   const router = useRouter(); // 初始化 useRouter
+
+  const { isRecording, audioBlob, startRecording, stopRecording } = useAudioRecorder();
+  const [isUploading, setIsUploading] = useState(false);
+
+  const handleUpload = async () => {
+    if (!audioBlob) return;
+
+    try {
+      setIsUploading(true);
+      const formData = new FormData();
+      formData.append('audio', audioBlob, 'recording.webm');
+
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Upload failed');
+      }
+
+      const data = await response.json();
+      console.log('Upload successful:', data);
+    } catch (error) {
+      console.error('Error uploading audio:', error);
+    } finally {
+      setIsUploading(false);
+    }
+  };
 
   const handleButtonClick = () => {
     router.push("/context"); // 跳转到 context_analysis 页面
@@ -27,26 +54,31 @@ const ContextSection = () => {
         你可以根据需要调整文字内容和样式。
       </p>
 
-      <ReactMediaRecorder
-      video
-      render={({ status, startRecording, stopRecording, mediaBlobUrl }) => (
-        <div>
-          <p>{status}</p>
-          <button className="w-full h-[10%] flex flex-col items-center justify-center bg-gray-100 p-6 border-2"
-            onClick={startRecording}>
-              Start Recording
-          </button>
-          <button className="w-full h-[10%] flex flex-col items-center justify-center bg-gray-100 p-6 border-2"
-            onClick={stopRecording}>
-              Stop Recording
-          </button>
-          <video 
-            className="w-full h-[10%] flex flex-col items-center justify-center bg-gray-100 p-6"
-            src={mediaBlobUrl} controls autoPlay loop 
-          />
-        </div>
-      )}
-      />
+      <div className="flex flex-col items-center gap-4">
+        <button
+          onClick={isRecording ? stopRecording : startRecording}
+          className={`px-6 py-3 rounded-lg font-semibold ${
+            isRecording 
+              ? 'bg-red-500 hover:bg-red-600' 
+              : 'bg-blue-500 hover:bg-blue-600'
+          } text-white transition`}
+        >
+          {isRecording ? '停止录音' : '开始录音'}
+        </button>
+
+        {audioBlob && (
+          <div className="flex flex-col items-center gap-4">
+            <audio src={URL.createObjectURL(audioBlob)} controls />
+            <button
+              onClick={handleUpload}
+              disabled={isUploading}
+              className="px-6 py-3 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition disabled:opacity-50"
+            >
+              {isUploading ? '上传中...' : '上传录音'}
+            </button>
+          </div>
+        )}
+      </div>
 
       {/* 大号按钮 */}
       <button 
