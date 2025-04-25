@@ -12,16 +12,22 @@ const EnchanterSection = () => {
   const router = useRouter(); // 初始化 useRouter
   const { isRecording, audioBlob, startRecording, stopRecording } = useAudioRecorder();
   const [isUploading, setIsUploading] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);  // 添加处理状态
 
   const dispatch = useDispatch()
 
   const handleButtonClick = async () => {
     if (isRecording) {
+      setIsProcessing(true);  // 开始处理时设置状态
       await stopRecording();
       // 等待 audioBlob 更新
       setTimeout(async () => {
-        if (!audioBlob) return;
+        if (!audioBlob) {
+          setIsProcessing(false);  // 如果没有音频数据，重置状态
+          return;
+        }
         await handleUpload();
+        setIsProcessing(false);  // 处理完成后重置状态
       }, 100);
     } else {
       startRecording();
@@ -59,7 +65,10 @@ const EnchanterSection = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+    <div 
+      className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6"
+      style={{ backgroundColor: 'rgb(181, 180, 162)' }}
+    >
       <h1 className="text-4xl font-bold text-gray-800 mb-6">
         The English Enhancement Enchanter
       </h1>
@@ -68,16 +77,19 @@ const EnchanterSection = () => {
         Your words are precious gems that deserve to shine their brightest. Let us polish them to perfection, revealing their true native brilliance. Grammar, vocabulary, and structure blend together in harmony, as we craft expressions that flow as smoothly as a mountain stream.
       </p>
 
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
         <button
           onClick={handleButtonClick}
-          className={`px-6 py-3 rounded-lg font-semibold select-none ${
+          disabled={isProcessing}
+          className={`px-6 py-3 rounded-lg font-semibold select-none w-full ${
             isRecording 
-              ? 'bg-red-500 hover:bg-red-600' 
-              : 'bg-blue-500 hover:bg-blue-600'
-          } text-white transition`}
+              ? 'bg-black hover:bg-gray-800' 
+              : 'bg-black hover:bg-gray-800'
+          } text-[rgb(223,247,3)] transition ${
+            isProcessing ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
         >
-          {isRecording ? 'STOP RECORDING' : 'START RECORDING'}
+          {isProcessing ? 'PROCESSING...' : isRecording ? 'STOP RECORDING' : 'START RECORDING'}
         </button>
 
         {isUploading && (

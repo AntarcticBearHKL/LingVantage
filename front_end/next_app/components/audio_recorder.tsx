@@ -41,9 +41,17 @@ export const useAudioRecorder = () => {
       };
 
       mediaRecorderRef.current.onstop = () => {
-        const blob = new Blob(chunksRef.current, { type: mimeType });
-        setAudioBlob(blob);
-        chunksRef.current = [];
+        try {
+          if (chunksRef.current.length > 0) {
+            const blob = new Blob(chunksRef.current, { type: mimeType });
+            setAudioBlob(blob);
+          } else {
+            console.warn('No audio data chunks were collected during recording');
+          }
+          chunksRef.current = [];
+        } catch (error) {
+          console.error('Error creating audio blob:', error);
+        }
       };
 
       // 每秒收集一次数据，避免内存问题

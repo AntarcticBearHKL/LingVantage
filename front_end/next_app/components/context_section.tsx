@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation"; // 导入 useRouter
 import { useState } from 'react';
 import { useAudioRecorder } from "./audio_recorder"; // 导入自定义的音频录制器
 import { setSpeechText } from '@/store/slices/speechSlice'
-import { RootState } from '../store'; // 导入 Redux store 的类型
 
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -12,16 +11,22 @@ const ContextSection = () => {
   const router = useRouter(); // 初始化 useRouter
   const { isRecording, audioBlob, startRecording, stopRecording } = useAudioRecorder();
   const [isUploading, setIsUploading] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const dispatch = useDispatch()
 
   const handleButtonClick = async () => {
     if (isRecording) {
+      setIsProcessing(true);
       await stopRecording();
       // 等待 audioBlob 更新
       setTimeout(async () => {
-        if (!audioBlob) return;
+        if (!audioBlob) {
+          setIsProcessing(false);
+          return;
+        }
         await handleUpload();
+        setIsProcessing(false);
       }, 100);
     } else {
       startRecording();
@@ -29,7 +34,10 @@ const ContextSection = () => {
   };
 
   const handleUpload = async () => {
-    if (!audioBlob) return;
+    if (!audioBlob){
+      console.warn('No audio blob available for upload');
+      return;
+    }
 
     try {
       setIsUploading(true);
@@ -59,7 +67,10 @@ const ContextSection = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+    <div 
+      className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6"
+      style={{ backgroundColor: 'rgb(183, 198, 175)' }}
+    >
       <h1 className="text-4xl font-bold text-gray-800 mb-6">
         The Context Whisperer
       </h1>
@@ -68,16 +79,19 @@ const ContextSection = () => {
         Like a gentle breeze carrying the first words of spring, our context generator crafts the perfect opening lines for your conversations. It weaves together phrases and translations, helping you step confidently into any dialogue, as naturally as dawn breaks over the horizon.
       </p>
 
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
         <button
           onClick={handleButtonClick}
-          className={`px-6 py-3 rounded-lg font-semibold select-none ${
+          disabled={isProcessing}
+          className={`px-6 py-3 rounded-lg font-semibold select-none w-full ${
             isRecording 
-              ? 'bg-red-500 hover:bg-red-600' 
-              : 'bg-blue-500 hover:bg-blue-600'
-          } text-white transition`}
+              ? 'bg-black hover:bg-gray-800' 
+              : 'bg-black hover:bg-gray-800'
+          } text-[rgb(223,247,3)] transition ${
+            isProcessing ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
         >
-          {isRecording ? 'STOP RECORDING' : 'START RECORDING'}
+          {isProcessing ? 'PROCESSING...' : isRecording ? 'STOP RECORDING' : 'START RECORDING'}
         </button>
 
         {isUploading && (
