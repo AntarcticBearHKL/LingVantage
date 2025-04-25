@@ -32,11 +32,11 @@ const ContextSection = () => {
       render={({ status, startRecording, stopRecording, mediaBlobUrl }) => (
         <div>
           <p>{status}</p>
-          <button 
+          <button className="w-full h-[10%] flex flex-col items-center justify-center bg-gray-100 p-6 border-2"
             onClick={startRecording}>
               Start Recording
           </button>
-          <button 
+          <button className="w-full h-[10%] flex flex-col items-center justify-center bg-gray-100 p-6 border-2"
             onClick={stopRecording}>
               Stop Recording
           </button>
