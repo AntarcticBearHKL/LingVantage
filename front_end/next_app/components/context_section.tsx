@@ -41,7 +41,7 @@ const ContextSection = () => {
 
       const data = await response.json();
       console.log('Upload successful:', data);
-      alert(data);
+      alert(data.text);
 
     } catch (error) {
       console.error('Error uploading audio:', error);
