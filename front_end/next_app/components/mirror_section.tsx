@@ -8,7 +8,7 @@ import { RootState } from '../store'; // 导入 Redux store 的类型
 
 import { useDispatch, useSelector } from 'react-redux'
 
-const ContextSection = () => {
+const MirrorSection = () => {
   const router = useRouter(); // 初始化 useRouter
   const { isRecording, audioBlob, startRecording, stopRecording } = useAudioRecorder();
   const [isUploading, setIsUploading] = useState(false);
@@ -93,4 +93,4 @@ const ContextSection = () => {
   );
 };
 
-export default ContextSection;
+export default MirrorSection;
