@@ -78,7 +78,8 @@ const ContextSection = () => {
             tip="Processing..." 
             style={{ 
               color: '#8B4513',
-            }} 
+            }}
+            fullscreen 
           />
         </div>
       )}

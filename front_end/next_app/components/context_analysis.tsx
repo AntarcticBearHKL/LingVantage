@@ -44,7 +44,7 @@ const ContextAnalysis = () => {
   const possibleScenarios = responses.filter(response => response[0] === "Possible Scenario");
 
   return (
-    <div className="w-screen 100dvh flex flex-col items-center relative">
+    <div className="w-screen h-screen flex flex-col items-center relative">
       {/* Background image with opacity */}
       <div 
         className="absolute inset-0 z-0 opacity-25" 
