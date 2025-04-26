@@ -64,14 +64,6 @@ const ContextAnalysis = () => {
             opacity: 0.85,
           }}
         ></div>
-        {/* Additional color layer for enhanced effect */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(183,198,175,0.4) 0%, rgba(200,220,190,0.3) 100%)',
-            mixBlendMode: 'overlay',
-          }}
-        ></div>
       </div>
       
       {/* Content with higher z-index to appear above the background */}

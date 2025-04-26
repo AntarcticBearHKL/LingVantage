@@ -1,5 +1,8 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
   "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/context/page": "app/context/page.js",
+  "/enchanter/page": "app/enchanter/page.js",
   "/mirror/page": "app/mirror/page.js",
   "/page": "app/page.js"
 }

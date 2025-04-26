@@ -61,17 +61,9 @@ const MirrorAnalysis = () => {
         <div 
           className="absolute inset-0"
           style={{
-            backgroundColor: 'rgb(183,198,175)',
+            backgroundColor: 'rgb(167,184,208)',
             mixBlendMode: 'soft-light',
             opacity: 0.85,
-          }}
-        ></div>
-        {/* Additional color layer for enhanced effect */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'rgb(183,198,175)',
-            mixBlendMode: 'overlay',
           }}
         ></div>
       </div>

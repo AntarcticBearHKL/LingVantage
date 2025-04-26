@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from 'react';
 import { useAudioRecorder } from "./audio_recorder";
 import { setSpeechText } from '@/store/slices/speechSlice'
-
+import { Spin } from 'antd';
 import { useDispatch } from 'react-redux'
 
 const MirrorSection = () => {
@@ -68,8 +68,21 @@ const MirrorSection = () => {
 
   return (
     <div 
-      className="flex flex-col items-center justify-center min-h-screen bg-[rgb(183,198,175)] p-6 relative"
+      className="flex flex-col items-center justify-center min-h-screen bg-[rgb(167,184,208)] p-6 relative"
     >
+      {/* 全屏加载动画 */}
+      {isUploading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-[rgba(167,184,208,0.8)] z-50">
+          <Spin 
+            size="large" 
+            tip="Processing..." 
+            style={{ 
+              color: '#8B4513',
+            }} 
+          />
+        </div>
+      )}
+
       {/* 内容容器 - 添加最大宽度并居中 */}
       <div className="w-full max-w-[800px] mx-auto relative h-full min-h-screen">
         {/* 图片层 - 使用绝对定位作为背景 */}
@@ -87,14 +100,14 @@ const MirrorSection = () => {
         <div className="absolute z-10 flex flex-col h-full w-full px-8">
           {/* The Context */}
           <div className="h-[13%] flex items-end pt-8 pl-8">
-            <h1 className="text-4xl font-bold text-gray-600">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-600">
               Mother Tongue 
             </h1>
           </div>
           
           {/* Whisperer - 接下来10%, 居中 */}
           <div className="h-[5%] flex justify-center items-center">
-            <h1 className="text-6xl font-bold text-gray-800">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-800">
               Mirror
             </h1>
           </div>
@@ -110,7 +123,7 @@ const MirrorSection = () => {
             <div className="flex flex-col h-full p-6 z-10 relative">
               {/* 主题文字部分 */}
               <div className="flex items-start w-full h-[50%]">
-                <p className="text-2xl text-gray-800 w-full text-justify">
+                <p className="text-base sm:text-xl md:text-2xl text-gray-800 w-full text-justify">
                   Transform your native thoughts into elegant expressions, like watching a butterfly emerge from its chrysalis. Each translation comes adorned with crystalline clarity, while key phrases sparkle with detailed explanations - illuminating your like stars in the night sky.
                 </p>
               </div>
@@ -123,7 +136,7 @@ const MirrorSection = () => {
                 <button
                   onClick={handleButtonClick}
                   disabled={isProcessing}
-                  className={`px-6 py-3 text-xl rounded-lg font-semibold select-none w-full max-w-md flex items-center justify-center ${
+                  className={`px-6 py-3 text-lg sm:text-xl md:text-2xl rounded-lg font-semibold select-none w-full max-w-md flex items-center justify-center ${
                     isRecording 
                       ? 'bg-black hover:bg-gray-800' 
                       : 'bg-black hover:bg-gray-800'
@@ -133,12 +146,6 @@ const MirrorSection = () => {
                 >
                   {isProcessing ? 'PROCESSING...' : isRecording ? 'STOP RECORDING' : 'LET YOUR HEART SPERAK'}
                 </button>
-
-                {isUploading && (
-                  <div className="text-gray-600 mt-2">
-                    LOADING...
-                  </div>
-                )}
               </div>
             </div>
           </div>

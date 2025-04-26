@@ -89,7 +89,7 @@ const FullPageSlider = () => {
         {/* 语言选择下拉菜单 */}
         <div>
           <Dropdown menu={{ items }} placement="bottomLeft">
-            <div className="px-4 py-2 bg-black/50 text-white rounded-full cursor-pointer">
+            <div className="px-4 py-2 backdrop-blur-md bg-white/20 text-white rounded-full cursor-pointer shadow-sm">
               Language 🌐
             </div>
           </Dropdown>
@@ -98,7 +98,7 @@ const FullPageSlider = () => {
         {/* 设置按钮 */}  
         <div 
           onClick={() => setDrawerOpen(true)} 
-          className="px-4 py-2 bg-black/50 text-white rounded-full cursor-pointer"
+          className="px-4 py-2 backdrop-blur-md bg-white/20 text-white rounded-full cursor-pointer shadow-sm"
         >
           <span>⚙️</span>
         </div>
@@ -123,9 +123,23 @@ const FullPageSlider = () => {
         height={300}
         closeIcon={false}
         maskClosable={true}
+        styles={{
+          body: {
+            padding: '16px',
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            backdropFilter: 'blur(10px)',
+          },
+          content: {
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            backdropFilter: 'blur(10px)',
+          },
+          wrapper: {
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          }
+        }}
       >
-        <h3>Login</h3>
-        <p>Your may input your openai api later</p>
+        <h3 className="text-lg font-semibold">Login</h3>
+        <p>Your may input your openai api later (dev)</p>
       </Drawer>
 
     </div>

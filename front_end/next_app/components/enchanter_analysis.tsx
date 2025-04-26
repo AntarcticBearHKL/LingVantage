@@ -63,17 +63,9 @@ const EnchanterAnalysis = () => {
         <div 
           className="absolute inset-0"
           style={{
-            backgroundColor: 'rgb(183,198,175)',
+            backgroundColor: 'rgb(181,180,162)',
             mixBlendMode: 'soft-light',
             opacity: 0.85,
-          }}
-        ></div>
-        {/* Additional color layer for enhanced effect */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: 'linear-gradient(135deg, rgba(183,198,175,0.4) 0%, rgb(183,198,175) 100%)',
-            mixBlendMode: 'overlay',
           }}
         ></div>
       </div>

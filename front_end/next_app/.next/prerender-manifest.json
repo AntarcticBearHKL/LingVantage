@@ -30,30 +30,6 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/context": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/context",
-      "dataRoute": "/context.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
     "/mirror": {
       "experimentalBypassFor": [
         {
@@ -102,6 +78,30 @@
         "x-next-revalidate-tag-token"
       ]
     },
+    "/context": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "Next-Action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/context",
+      "dataRoute": "/context.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
     "/": {
       "experimentalBypassFor": [
         {
@@ -130,8 +130,8 @@
   "dynamicRoutes": {},
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "263a5d8265b824e5ee6ab9a0158d761c",
-    "previewModeSigningKey": "d1876595b6890451ec9dc047c784cb67fb7f16aaf5cdae802d810a97ffd58b02",
-    "previewModeEncryptionKey": "873dedca3d9753fcad571dbb4b762f57cc695848b3cdf3a085740959c59a2b0d"
+    "previewModeId": "736e8aaedd49807495313522a206c4ef",
+    "previewModeSigningKey": "c293d74bfcfd48c79db5366912c73efcb8f442de84dfbbc44c4c1109014363f0",
+    "previewModeEncryptionKey": "31d2258ce9ea23893f04576c13829ae4aebee293306c96a0173e766a49aa12ce"
   }
 }
