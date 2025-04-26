@@ -1,0 +1,201 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\404.html",
+      "PackagePath": "staticwebassets\\404.html"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\336-78ff33eac754f892.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\336-78ff33eac754f892.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\341.df3329d77a5faa19.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\341.df3329d77a5faa19.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\472.a3826d29d6854395.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\472.a3826d29d6854395.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\4bd1b696-af3a4d1dcb00da36.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\4bd1b696-af3a4d1dcb00da36.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\540-27184ee3716a98e0.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\540-27184ee3716a98e0.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\684-16de2b802a327e90.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\684-16de2b802a327e90.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\874-da29018cc712318b.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\874-da29018cc712318b.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\990-6ecfc36c27f555db.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\990-6ecfc36c27f555db.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\app\\_not-found\\page-f11017b894cc372f.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\app\\_not-found\\page-f11017b894cc372f.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\app\\context\\page-5ffa77bc4ff91861.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\app\\context\\page-5ffa77bc4ff91861.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\app\\enchanter\\page-adc7c7247ff69dfa.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\app\\enchanter\\page-adc7c7247ff69dfa.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\app\\layout-3093f2ceb09e8b99.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\app\\layout-3093f2ceb09e8b99.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\app\\mirror\\page-4a5fe130b8144fd0.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\app\\mirror\\page-4a5fe130b8144fd0.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\app\\page-60087b68ae4a5afe.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\app\\page-60087b68ae4a5afe.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\framework-f593a28cde54158e.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\framework-f593a28cde54158e.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\main-app-1dd43365f9315d64.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\main-app-1dd43365f9315d64.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\main-c1f90a3fdf13ab74.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\main-c1f90a3fdf13ab74.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\pages\\_app-92f2aae776f86b9c.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\pages\\_app-92f2aae776f86b9c.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\pages\\_error-71d2b6a7b832d02a.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\pages\\_error-71d2b6a7b832d02a.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\polyfills-42372ed130431b0a.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\polyfills-42372ed130431b0a.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\chunks\\webpack-5601f1e90da4c867.js",
+      "PackagePath": "staticwebassets\\_next\\static\\chunks\\webpack-5601f1e90da4c867.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\css\\36391fb72068d75e.css",
+      "PackagePath": "staticwebassets\\_next\\static\\css\\36391fb72068d75e.css"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\jU7BkYID8GxgmF80glbEb\\_buildManifest.js",
+      "PackagePath": "staticwebassets\\_next\\static\\jU7BkYID8GxgmF80glbEb\\_buildManifest.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\_next\\static\\jU7BkYID8GxgmF80glbEb\\_ssgManifest.js",
+      "PackagePath": "staticwebassets\\_next\\static\\jU7BkYID8GxgmF80glbEb\\_ssgManifest.js"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\context.html",
+      "PackagePath": "staticwebassets\\context.html"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\context.txt",
+      "PackagePath": "staticwebassets\\context.txt"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\enchanter.html",
+      "PackagePath": "staticwebassets\\enchanter.html"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\enchanter.txt",
+      "PackagePath": "staticwebassets\\enchanter.txt"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\file.svg",
+      "PackagePath": "staticwebassets\\file.svg"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\fonts\\Jaini-Regular.ttf",
+      "PackagePath": "staticwebassets\\fonts\\Jaini-Regular.ttf"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\globe.svg",
+      "PackagePath": "staticwebassets\\globe.svg"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\images\\1.jpg",
+      "PackagePath": "staticwebassets\\images\\1.jpg"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\images\\2.jpg",
+      "PackagePath": "staticwebassets\\images\\2.jpg"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\images\\3.jpg",
+      "PackagePath": "staticwebassets\\images\\3.jpg"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\images\\b.jpg",
+      "PackagePath": "staticwebassets\\images\\b.jpg"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\index.txt",
+      "PackagePath": "staticwebassets\\index.txt"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\mirror.html",
+      "PackagePath": "staticwebassets\\mirror.html"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\mirror.txt",
+      "PackagePath": "staticwebassets\\mirror.txt"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\next.svg",
+      "PackagePath": "staticwebassets\\next.svg"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\vercel.svg",
+      "PackagePath": "staticwebassets\\vercel.svg"
+    },
+    {
+      "Id": "D:\\BlabIt\\back_end\\api\\wwwroot\\window.svg",
+      "PackagePath": "staticwebassets\\window.svg"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.api.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.api.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.api.props",
+      "PackagePath": "build\\api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.api.props",
+      "PackagePath": "buildMultiTargeting\\api.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.api.props",
+      "PackagePath": "buildTransitive\\api.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
