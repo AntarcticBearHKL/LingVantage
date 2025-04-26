@@ -39,6 +39,13 @@ On desktop, users need to click on screen edges to navigate between pages ！
 - Mobile responsiveness needs improvement on smaller screens
 - Backend service occasionally returns malformed JSON responses
 
+## 🔄 Current Development Todo List
+
+- Fix iOS device compatibility issues to ensure mobile access works properly
+- Resolve responsive design problems on smaller screens
+- Implement more robust error handling for API connectivity failures
+- Optimize speech recognition for various environmental conditions
+
 ## 🏗️ Architecture
 
 BlabIt is built with a modern tech stack:
