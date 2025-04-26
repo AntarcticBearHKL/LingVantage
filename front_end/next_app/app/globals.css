@@ -21,3 +21,10 @@ body {
   color: var(--foreground);
   font-family: 'Jaini', Arial, Helvetica, sans-serif;
 }
+
+/* 添加到文件底部 */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}

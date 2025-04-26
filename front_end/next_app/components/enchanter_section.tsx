@@ -87,7 +87,7 @@ const EnchanterSection = () => {
       )}
       
       {/* 内容容器 - 添加最大宽度并居中 */}
-      <div className="w-full max-w-[800px] mx-auto relative h-full min-h-screen">
+      <div className="w-full max-w-[800px] mx-auto relative h-full min-h-screen pb-24">
         {/* 图片层 - 使用绝对定位作为背景 */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-70 z-0 w-4/5">
           <div className="w-full">
@@ -135,8 +135,8 @@ const EnchanterSection = () => {
         </div>
       </div>
       
-      {/* 悬浮按钮 - 固定在屏幕底部中央 */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
+      {/* 悬浮按钮 - 固定在视口内可见区域，且考虑 iOS Safari 底部 */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4 safe-bottom">
         <button
           onClick={handleButtonClick}
           disabled={isProcessing}
