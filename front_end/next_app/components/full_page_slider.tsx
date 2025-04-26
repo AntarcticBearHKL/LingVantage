@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useSwipeable } from "react-swipeable";
-import { Drawer, Dropdown } from "antd";
+import { Drawer, Dropdown, message } from "antd";
 import type { MenuProps } from "antd";
 
 import ContextSection from "./context_section";
@@ -20,6 +20,7 @@ const noSelectStyles = {
 const FullPageSlider = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
 
   const items: MenuProps["items"] = [
     { key: "en", label: "English", },
@@ -38,11 +39,21 @@ const FullPageSlider = () => {
 
   const handleSwipe = (direction:string) => {
     if (direction === "LEFT") {
-      // 向左滑动，如果是最后一页则回到第一页
-      setCurrentPage(currentPage < pages.length - 1 ? currentPage + 1 : 0);
+      // 向左滑动，前进到下一页
+      if (currentPage < pages.length - 1) {
+        setCurrentPage(currentPage + 1);
+      } else {
+        // 已经是最后一页，显示提示
+        messageApi.loading("More magical cards are being crafted — stay tuned for the wonder ahead!");
+      }
     } else if (direction === "RIGHT") {
-      // 向右滑动，如果是第一页则回到最后一页
-      setCurrentPage(currentPage > 0 ? currentPage - 1 : pages.length - 1);
+      // 向右滑动，回到上一页
+      if (currentPage > 0) {
+        setCurrentPage(currentPage - 1);
+      } else {
+        // 已经是第一页，显示提示
+        messageApi.warning("This page, gently turned, marks the beginning of our journey.");
+      }
     }
   };
 
@@ -70,6 +81,7 @@ const FullPageSlider = () => {
         ...noSelectStyles // Apply the non-selectable styles here
       }}
     >
+      {contextHolder}
       {/* 左侧点击区域 */}
       <div 
         className="fixed left-0 top-0 w-1/4 h-full z-[5]"
@@ -83,9 +95,9 @@ const FullPageSlider = () => {
         onClick={(e) => handleSideClick("LEFT", e)}
         style={{ opacity: 0 }}
       />
+
       {/* 背景图片 */}
-
-
+      
       {/* 顶部栏目 */}
       <div className="fixed top-0 left-0 w-full flex justify-between items-center px-5 py-4 z-10">
         {/* 语言选择下拉菜单 */}
@@ -116,7 +128,6 @@ const FullPageSlider = () => {
           </div>
         ))}
       </div>
-
 
       <Drawer
         placement="bottom"

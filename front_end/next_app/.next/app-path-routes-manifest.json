@@ -1,8 +1,8 @@
 {
   "/_not-found/page": "/_not-found",
   "/favicon.ico/route": "/favicon.ico",
-  "/context/page": "/context",
   "/enchanter/page": "/enchanter",
   "/mirror/page": "/mirror",
+  "/context/page": "/context",
   "/page": "/"
 }
