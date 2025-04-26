@@ -75,7 +75,7 @@ const ContextAnalysis = () => {
       </div>
       
       {/* Content with higher z-index to appear above the background */}
-      <div className="z-10 flex flex-col w-full p-6">
+      <div className="z-10 flex flex-col w-full max-w-[800px] mx-auto p-6">
         {/* Back button */}
         <div className="flex w-full mb-8">
           <Link href="/" className="flex items-center justify-center w-20 h-10 rounded-full bg-black/70 text-white hover:bg-black/90">
@@ -106,7 +106,7 @@ const ContextAnalysis = () => {
           {recommendedResponses.map((response, index) => (
             <div 
               key={index} 
-              className="flex flex-col p-4 rounded-lg shadow mb-2 w-full max-w-2xl backdrop-filter backdrop-blur-md bg-white/30 border border-white/40"
+              className="flex flex-col p-4 rounded-lg shadow mb-2 w-full backdrop-filter backdrop-blur-md bg-white/30 border border-white/40"
             >
               <p className="text-center font-medium text-gray-800">{response[1]}</p>
             </div>
@@ -122,7 +122,7 @@ const ContextAnalysis = () => {
           {possibleScenarios.map((scenario, index) => (
             <div 
               key={index} 
-              className="flex flex-col p-4 rounded-lg shadow mb-2 w-full max-w-2xl backdrop-filter backdrop-blur-md bg-white/30 border border-white/40"
+              className="flex flex-col p-4 rounded-lg shadow mb-2 w-full backdrop-filter backdrop-blur-md bg-white/30 border border-white/40"
             >
               <p className="text-center font-medium text-gray-800">{scenario[1]}</p>
             </div>

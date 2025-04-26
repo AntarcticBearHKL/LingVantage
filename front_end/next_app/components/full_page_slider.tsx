@@ -9,6 +9,14 @@ import ContextSection from "./context_section";
 import EnchanterSection from "./enchanter_section";
 import MirrorSection from "./mirror_section";
 
+// Add CSS classes for non-selectable text
+const noSelectStyles = {
+  WebkitUserSelect: "none" as const,
+  MozUserSelect: "none" as const,
+  msUserSelect: "none" as const,
+  userSelect: "none" as const,
+};
+
 const FullPageSlider = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -29,10 +37,12 @@ const FullPageSlider = () => {
   ];
 
   const handleSwipe = (direction:string) => {
-    if (direction === "LEFT" && currentPage < pages.length - 1) {
-      setCurrentPage(currentPage + 1);
-    } else if (direction === "RIGHT" && currentPage > 0) {
-      setCurrentPage(currentPage - 1);
+    if (direction === "LEFT") {
+      // 向左滑动，如果是最后一页则回到第一页
+      setCurrentPage(currentPage < pages.length - 1 ? currentPage + 1 : 0);
+    } else if (direction === "RIGHT") {
+      // 向右滑动，如果是第一页则回到最后一页
+      setCurrentPage(currentPage > 0 ? currentPage - 1 : pages.length - 1);
     }
   };
 
@@ -41,11 +51,39 @@ const FullPageSlider = () => {
     onSwipedRight: () => handleSwipe("RIGHT"),
   });
 
+  // 处理屏幕左右区域的点击事件
+  const handleSideClick = (direction: string, event: React.MouseEvent) => {
+    handleSwipe(direction);
+  };
+
   return (
     <div
       {...handlers}
-      style={{ display: "flex", width: "100vw", height: "100dvh", overflow: "hidden", position: "relative", }}
+      style={{ 
+        display: "flex", 
+        width: "100vw", 
+        height: "100dvh", 
+        overflow: "hidden", 
+        position: "relative",
+        ...noSelectStyles // Apply the non-selectable styles here
+      }}
     >
+      {/* 左侧点击区域 */}
+      <div 
+        className="fixed left-0 top-0 w-1/4 h-full z-[5]"
+        onClick={(e) => handleSideClick("RIGHT", e)}
+        style={{ opacity: 0 }}
+      />
+      
+      {/* 右侧点击区域 */}
+      <div 
+        className="fixed right-0 top-0 w-1/4 h-full z-[5]"
+        onClick={(e) => handleSideClick("LEFT", e)}
+        style={{ opacity: 0 }}
+      />
+      {/* 背景图片 */}
+
+
       {/* 顶部栏目 */}
       <div className="fixed top-0 left-0 w-full flex justify-between items-center px-5 py-4 z-10">
         {/* 语言选择下拉菜单 */}
@@ -77,28 +115,6 @@ const FullPageSlider = () => {
         ))}
       </div>
 
-        {/* 左右按钮 - 移到屏幕底部 */}
-        <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 flex gap-3 z-10">
-          <button
-            onClick={() => handleSwipe("RIGHT")}
-            disabled={currentPage === 0}
-            className={`px-4 py-2 bg-black/50 text-white border-white rounded-full ${
-              currentPage === 0 ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
-            }`}
-          >
-            ← Prev
-          </button>
-
-          <button
-            onClick={() => handleSwipe("LEFT")}
-            disabled={currentPage === pages.length - 1}
-            className={`px-4 py-2 bg-black/50 text-white border-white rounded-full ${
-              currentPage === pages.length - 1 ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
-            }`}
-          >
-            Next →
-          </button>
-        </div>
 
       <Drawer
         placement="bottom"
