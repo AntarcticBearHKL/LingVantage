@@ -1,4 +1,4 @@
-![BlabIt Logo](front_end/next_app/public/images/logo.jpg)
+<img src="front_end/next_app/public/images/logo.jpg" alt="BlabIt Logo" width="300" />
 
 # 🗣️ BlabIt ✨
 
