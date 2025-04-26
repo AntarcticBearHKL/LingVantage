@@ -1,13 +1,12 @@
 "use client";
 
 import { useSelector } from 'react-redux'
-import { RootState } from '../store'; // 导入 Redux store 的类型
+import { RootState } from '../store';
 import { useEffect, useState } from 'react';
-
+import Link from 'next/link';
 
 const MirrorAnalysis = () => {
-  const someData = useSelector((state: RootState) => state.speech.speechText); // 从 Redux store 中获取数据
-
+  const someData = useSelector((state: RootState) => state.speech.speechText);
   const [responses, setResponses] = useState<[string, string][]>([]);
 
   useEffect(() => {
@@ -27,7 +26,7 @@ const MirrorAnalysis = () => {
         const data = await response.json();
         
         setResponses(JSON.parse(data.response));
-  
+        
         console.log('Server response:', responses);
 
       } catch (error) {
@@ -40,19 +39,96 @@ const MirrorAnalysis = () => {
     }
   }, []);
 
+  // Filter responses for recommended and possible scenarios
+  const recommendedResponses = responses.filter(response => response[0] === "Recommended Response");
+  const possibleScenarios = responses.filter(response => response[0] === "Possible Scenario");
+
   return (
-    <div className="w-screen h-screen flex flex-col justify-center items-center bg-gray-100">
-      <h1 className="text-2xl font-bold text-gray-800">
-        {someData}
-      </h1>
-
-      {responses.map((response, index) => (
-        <div key={index} className="flex flex-col p-4 bg-white rounded-lg shadow mb-2 w-full max-w-2xl">
-          <p>问题: {response[0]}</p>
-          <p>回答: {response[1]}</p>
+    <div className="w-screen h-screen flex flex-col items-center relative">
+      {/* Background image with opacity */}
+      <div 
+        className="absolute inset-0 z-0 opacity-25" 
+        style={{
+          backgroundImage: "url('/images/b.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'contrast(1.1) saturate(1.2)',
+        }}
+      >
+        {/* RGB filter overlay */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            backgroundColor: 'rgb(183,198,175)',
+            mixBlendMode: 'soft-light',
+            opacity: 0.85,
+          }}
+        ></div>
+        {/* Additional color layer for enhanced effect */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: 'linear-gradient(135deg, rgba(183,198,175,0.4) 0%, rgba(200,220,190,0.3) 100%)',
+            mixBlendMode: 'overlay',
+          }}
+        ></div>
+      </div>
+      
+      {/* Content with higher z-index to appear above the background */}
+      <div className="z-10 flex flex-col w-full max-w-[800px] mx-auto p-6">
+        {/* Back button */}
+        <div className="flex w-full mb-8">
+          <Link href="/" className="flex items-center justify-center w-20 h-10 rounded-full bg-black/70 text-white hover:bg-black/90">
+            BACK
+          </Link>
         </div>
-      ))}
-
+        
+        {/* IN THE CONTEXT OF heading */}
+        <h2 className="text-xl font-semibold text-gray-800 text-left mb-4">
+          IN THE CONTEXT OF
+        </h2>
+        
+        {/* Quote with someData */}
+        <div className="w-full flex justify-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-800 text-center">
+            <span className="text-5xl">"</span>
+            {someData}
+            <span className="text-5xl">"</span>
+          </h1>
+        </div>
+        
+        {/* Recommended Responses Section */}
+        <h3 className="text-xl font-semibold text-gray-800 text-left mb-4">
+          YOU SHOULD SAY
+        </h3>
+        
+        <div className="w-full flex flex-col items-center mb-8">
+          {recommendedResponses.map((response, index) => (
+            <div 
+              key={index} 
+              className="flex flex-col p-4 rounded-lg shadow mb-2 w-full backdrop-filter backdrop-blur-md bg-white/30 border border-white/40"
+            >
+              <p className="text-center font-medium text-gray-800">{response[1]}</p>
+            </div>
+          ))}
+        </div>
+        
+        {/* Possible Scenarios Section */}
+        <h3 className="text-xl font-semibold text-gray-800 text-left mb-4">
+          POSSIBLE SCENARIOS
+        </h3>
+        
+        <div className="w-full flex flex-col items-center">
+          {possibleScenarios.map((scenario, index) => (
+            <div 
+              key={index} 
+              className="flex flex-col p-4 rounded-lg shadow mb-2 w-full backdrop-filter backdrop-blur-md bg-white/30 border border-white/40"
+            >
+              <p className="text-center font-medium text-gray-800">{scenario[1]}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
