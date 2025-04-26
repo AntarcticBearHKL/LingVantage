@@ -25,7 +25,7 @@ Our spell-crafters are brewing new enchantments to further empower your linguist
 
 https://blabit.xyz
 
-On desktop, users need to click on screen edges to navigate between pages ！
+On desktop, users need to click on screen edges to navigate between pages！
 
 ## 🔴 Critical Bugs
 
