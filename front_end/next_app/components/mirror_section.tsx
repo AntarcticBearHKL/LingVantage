@@ -87,7 +87,7 @@ const MirrorSection = () => {
       )}
 
       {/* 内容容器 - 添加最大宽度并居中 */}
-      <div className="w-full max-w-[800px] mx-auto relative h-full min-h-screen pb-24">
+      <div className="w-full max-w-[800px] mx-auto relative h-full min-h-screen">
         {/* 图片层 - 使用绝对定位作为背景 */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-70 z-0 w-4/5">
           <div className="w-full">
@@ -116,36 +116,36 @@ const MirrorSection = () => {
           </div>
           
           {/* 添加填充器空间 */}
-          <div className="h-[40%]"></div>
+          <div className="h-[25%]"></div>
           
-          {/* 主题文字容器 - 只保留文字部分 */}
-          <div className="h-[35%] w-full flex flex-col relative">
+          {/* 新的结构：文字和按钮在同一个容器中 */}
+          <div className="h-[57%] w-full flex flex-col relative">
             {/* 玻璃效果背景 */}
             <span className="absolute inset-0 bg-white/25 backdrop-blur-xl backdrop-filter backdrop-saturate-150 rounded-lg z-0"></span>
             
-            <div className="flex flex-col h-full p-6 z-10 relative">
-              {/* 主题文字部分 */}
-              <div className="flex items-center w-full h-full">
+            <div className="flex flex-col h-full p-6 pt-8 z-10 relative">
+              {/* 主题文字部分 - 占据容器的65% */}
+              <div className="flex-1 min-h-0 mb-8 flex items-center">
                 <p className="text-base sm:text-xl md:text-2xl text-gray-800 w-full text-justify">
                 Transform your native thoughts into elegant expressions, like watching a butterfly emerge from its chrysalis. Each translation comes adorned with crystalline clarity, while key phrases sparkle with detailed explanations - illuminating your path to understanding like stars in the night sky.
                 </p>
               </div>
+              
+              {/* 按钮部分 - 占据容器的30% */}
+              <div className="h-[30%] min-h-[60px] flex items-center justify-center px-4">
+                <button
+                  onClick={handleButtonClick}
+                  disabled={isProcessing}
+                  className={`px-6 py-3 text-lg sm:text-xl md:text-2xl rounded-lg font-semibold select-none w-full shadow-lg flex items-center justify-center bg-black hover:bg-gray-800 text-[rgb(167,184,208)] transition-colors ${
+                    isProcessing ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
+                >
+                  {isProcessing ? 'PROCESSING...' : isRecording ? 'STOP RECORDING' : 'SET THE CONTEXT FOR ME'}
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      
-      {/* 悬浮按钮 - 固定在视口内可见区域，且考虑 iOS Safari 底部 */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4 safe-bottom">
-        <button
-          onClick={handleButtonClick}
-          disabled={isProcessing}
-          className={`px-6 py-3 text-lg sm:text-xl md:text-2xl rounded-lg font-semibold select-none w-full shadow-lg flex items-center justify-center bg-black hover:bg-gray-800 text-[rgb(167,184,208)] transition-colors ${
-            isProcessing ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
-        >
-          {isProcessing ? 'PROCESSING...' : isRecording ? 'STOP RECORDING' : 'SET THE CONTEXT FOR ME'}
-        </button>
       </div>
     </div>
   );
