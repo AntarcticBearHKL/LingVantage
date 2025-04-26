@@ -1,3 +1,5 @@
+![BlabIt Logo](front_end/next_app/public/images/logo.jpg)
+
 # 🗣️ BlabIt ✨
 
 > *Pages of linguistic enchantment, your speaking magic book unfolds*
