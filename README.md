@@ -5,8 +5,7 @@
 🏆 This project originally started as part of the Macathon competition. The code related to the competition will stay on a specific branch when the deadline hits, but the project itself will keep being developed afterward.
 
 ## 🌟 What is BlabIt?
-
-BlabIt is a magical toolkit that helps you navigate the world of English oral communication. Like a trusted guide through unfamiliar linguistic landscapes, our app offers:
+BlabIt is a magical toolkit that leverages the power of AI to help you navigate the world of English oral communication. Like a trusted guide through unfamiliar linguistic landscapes, our app offers:
 
 - **The Context Whisperer** 🧙‍♂️ - Provides situational context and suggests appropriate phrases for different conversation scenarios
 - **English Enhancement Enchanter** ✒️ - Identifies and helps correct speech patterns, grammar issues, and expression improvements
