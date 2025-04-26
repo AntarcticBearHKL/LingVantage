@@ -138,7 +138,7 @@ const ContextSection = () => {
         <button
           onClick={handleButtonClick}
           disabled={isProcessing}
-          className={`px-6 py-3 text-lg sm:text-xl md:text-2xl rounded-lg font-semibold select-none w-full shadow-lg flex items-center justify-center bg-black hover:bg-gray-800 text-[rgb(223,247,3)] transition-colors ${
+          className={`px-6 py-3 text-lg sm:text-xl md:text-2xl rounded-lg font-semibold select-none w-full shadow-lg flex items-center justify-center bg-black hover:bg-gray-800 text-[rgb(183,198,175))] transition-colors ${
             isProcessing ? 'opacity-50 cursor-not-allowed' : ''
           }`}
         >
