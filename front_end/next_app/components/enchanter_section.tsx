@@ -68,7 +68,7 @@ const EnchanterSection = () => {
 
   return (
     <div 
-      className="flex flex-col items-center justify-center min-h-screen bg-[rgb(181,180,162)] p-6 relative"
+      className="flex flex-col items-center justify-center min-h-screen bg-[rgb(181,180,162)] p-0 relative"
     >
       {/* 全屏加载动画 */}
       {isUploading && (
@@ -115,24 +115,21 @@ const EnchanterSection = () => {
           {/* 添加填充器空间 */}
           <div className="h-[40%]"></div>
           
-          {/* 合并的主题文字和按钮容器 - 占据30%高度 */}
-          <div className="h-[40%] w-full flex flex-col justify-between relative">
+           {/* 合并的主题文字和按钮容器 - 占据30%高度 */}
+           <div className="h-[35%] w-full flex flex-col justify-between relative">
             {/* 玻璃效果背景 */}
             <span className="absolute inset-0 bg-white/25 backdrop-blur-xl backdrop-filter backdrop-saturate-150 rounded-lg z-0"></span>
             
-            <div className="flex flex-col h-full p-6 z-10 relative">
-              {/* 主题文字部分 */}
-              <div className="flex items-start w-full h-[50%]">
+            <div className="flex flex-col h-full p-6 z-10 relative justify-between">
+              {/* 主题文字部分 - 移到顶部 */}
+              <div className="flex items-start w-full">
                 <p className="text-base sm:text-xl md:text-2xl text-gray-800 w-full text-justify">
                 Your words are precious gems that deserve to shine their brightest. Let us polish them to perfection, revealing their true native brilliance. Grammar, vocabulary, and structure blend together in harmony, as we craft expressions that flow as smoothly as a mountain stream.
                 </p>
               </div>
               
-              {/* 占位空间 - 5%高度 */}
-              <div className="h-[24%]"></div>
-              
-              {/* 按钮部分 */}
-              <div className="flex justify-center w-full h-[15%]">
+              {/* 按钮部分 - 移到底部 */}
+              <div className="flex justify-center w-full">
                 <button
                   onClick={handleButtonClick}
                   disabled={isProcessing}
@@ -144,7 +141,7 @@ const EnchanterSection = () => {
                     isProcessing ? 'opacity-50 cursor-not-allowed' : ''
                   }`}
                 >
-                  {isProcessing ? 'PROCESSING...' : isRecording ? 'STOP RECORDING' : 'ENGLISH GO FOR IT!'}
+                  {isProcessing ? 'PROCESSING...' : isRecording ? 'STOP RECORDING' : 'SET THE CONTEXT FOR ME'}
                 </button>
               </div>
             </div>

@@ -68,7 +68,7 @@ const MirrorSection = () => {
 
   return (
     <div 
-      className="flex flex-col items-center justify-center min-h-screen bg-[rgb(167,184,208)] p-6 relative"
+      className="flex flex-col items-center justify-center min-h-screen bg-[rgb(167,184,208)] p-0 relative"
     >
       {/* 全屏加载动画 */}
       {isUploading && (
@@ -115,24 +115,22 @@ const MirrorSection = () => {
           {/* 添加填充器空间 */}
           <div className="h-[40%]"></div>
           
-          {/* 合并的主题文字和按钮容器 - 占据30%高度 */}
-          <div className="h-[40%] w-full flex flex-col justify-between relative">
+           {/* 合并的主题文字和按钮容器 - 占据30%高度 */}
+           <div className="h-[35%] w-full flex flex-col justify-between relative">
             {/* 玻璃效果背景 */}
             <span className="absolute inset-0 bg-white/25 backdrop-blur-xl backdrop-filter backdrop-saturate-150 rounded-lg z-0"></span>
             
-            <div className="flex flex-col h-full p-6 z-10 relative">
-              {/* 主题文字部分 */}
-              <div className="flex items-start w-full h-[50%]">
+            <div className="flex flex-col h-full p-6 z-10 relative justify-between">
+              {/* 主题文字部分 - 移到顶部 */}
+              <div className="flex items-start w-full">
                 <p className="text-base sm:text-xl md:text-2xl text-gray-800 w-full text-justify">
-                  Transform your native thoughts into elegant expressions, like watching a butterfly emerge from its chrysalis. Each translation comes adorned with crystalline clarity, while key phrases sparkle with detailed explanations - illuminating your like stars in the night sky.
+                Transform your native thoughts into elegant expressions, like watching a butterfly emerge from its chrysalis. Each translation comes adorned with crystalline clarity, while key phrases sparkle with detailed explanations - illuminating your path to understanding like stars in the night sky.
+
                 </p>
               </div>
               
-              {/* 占位空间 - 5%高度 */}
-              <div className="h-[24%]"></div>
-              
-              {/* 按钮部分 */}
-              <div className="flex justify-center w-full h-[15%]">
+              {/* 按钮部分 - 移到底部 */}
+              <div className="flex justify-center w-full">
                 <button
                   onClick={handleButtonClick}
                   disabled={isProcessing}
@@ -144,7 +142,7 @@ const MirrorSection = () => {
                     isProcessing ? 'opacity-50 cursor-not-allowed' : ''
                   }`}
                 >
-                  {isProcessing ? 'PROCESSING...' : isRecording ? 'STOP RECORDING' : 'LET YOUR HEART SPERAK'}
+                  {isProcessing ? 'PROCESSING...' : isRecording ? 'STOP RECORDING' : 'SET THE CONTEXT FOR ME'}
                 </button>
               </div>
             </div>

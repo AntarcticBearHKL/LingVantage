@@ -65,6 +65,8 @@ const FullPageSlider = () => {
         height: "100dvh", 
         overflow: "hidden", 
         position: "relative",
+        padding: 0, // Added explicit padding: 0
+        margin: 0, // Also adding margin: 0 for good measure
         ...noSelectStyles // Apply the non-selectable styles here
       }}
     >
