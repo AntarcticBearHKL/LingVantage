@@ -1,6 +1,10 @@
 using BlabIt.Services;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configure HTTPS redirection and default ports
+builder.WebHost.UseUrls("http://0.0.0.0:80", "https://0.0.0.0:443");
 
 builder.Services.AddCors(options =>
 {
@@ -12,6 +16,13 @@ builder.Services.AddCors(options =>
     });
 });
 
+// Configure HTTPS redirection
+builder.Services.AddHttpsRedirection(options =>
+{
+    options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+    options.HttpsPort = 443;
+});
+
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
@@ -20,6 +31,15 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+// Enable HTTPS redirection and appropriate headers forwarding if behind proxy
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
+
+// Add HTTPS redirection before other middleware
+app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.MapFallbackToFile("index.html");
@@ -96,6 +116,5 @@ app.MapPost("/transcribe", async (HttpContext context) =>
         return Results.Problem(ex.Message);
     }
 });
-
 
 app.Run();

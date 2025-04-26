@@ -115,38 +115,34 @@ const EnchanterSection = () => {
           {/* 添加填充器空间 */}
           <div className="h-[40%]"></div>
           
-           {/* 合并的主题文字和按钮容器 - 占据30%高度 */}
-           <div className="h-[35%] w-full flex flex-col justify-between relative">
+          {/* 主题文字容器 - 只保留文字部分 */}
+          <div className="h-[35%] w-full flex flex-col relative">
             {/* 玻璃效果背景 */}
             <span className="absolute inset-0 bg-white/25 backdrop-blur-xl backdrop-filter backdrop-saturate-150 rounded-lg z-0"></span>
             
-            <div className="flex flex-col h-full p-6 z-10 relative justify-between">
-              {/* 主题文字部分 - 移到顶部 */}
-              <div className="flex items-start w-full">
+            <div className="flex flex-col h-full p-6 z-10 relative">
+              {/* 主题文字部分 */}
+              <div className="flex items-center w-full h-full">
                 <p className="text-base sm:text-xl md:text-2xl text-gray-800 w-full text-justify">
                 Your words are precious gems that deserve to shine their brightest. Let us polish them to perfection, revealing their true native brilliance. Grammar, vocabulary, and structure blend together in harmony, as we craft expressions that flow as smoothly as a mountain stream.
                 </p>
               </div>
-              
-              {/* 按钮部分 - 移到底部 */}
-              <div className="flex justify-center w-full">
-                <button
-                  onClick={handleButtonClick}
-                  disabled={isProcessing}
-                  className={`px-6 py-3 text-lg sm:text-xl md:text-2xl rounded-lg font-semibold select-none w-full max-w-md flex items-center justify-center ${
-                    isRecording 
-                      ? 'bg-black hover:bg-gray-800' 
-                      : 'bg-black hover:bg-gray-800'
-                  } text-[rgb(223,247,3)] transition ${
-                    isProcessing ? 'opacity-50 cursor-not-allowed' : ''
-                  }`}
-                >
-                  {isProcessing ? 'PROCESSING...' : isRecording ? 'STOP RECORDING' : 'SET THE CONTEXT FOR ME'}
-                </button>
-              </div>
             </div>
           </div>
         </div>
+      </div>
+      
+      {/* 悬浮按钮 - 固定在屏幕底部中央 */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md px-4">
+        <button
+          onClick={handleButtonClick}
+          disabled={isProcessing}
+          className={`px-6 py-3 text-lg sm:text-xl md:text-2xl rounded-lg font-semibold select-none w-full shadow-lg flex items-center justify-center bg-black hover:bg-gray-800 text-[rgb(223,247,3)] transition-colors ${
+            isProcessing ? 'opacity-50 cursor-not-allowed' : ''
+          }`}
+        >
+          {isProcessing ? 'PROCESSING...' : isRecording ? 'STOP RECORDING' : 'SET THE CONTEXT FOR ME'}
+        </button>
       </div>
     </div>
   );
