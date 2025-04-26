@@ -4,7 +4,7 @@
 
 > *Pages of linguistic enchantment, your speaking magic book unfolds*
 
-🏆 This project originally started as part of the Macathon competition. The code related to the competition will stay on a specific branch when the deadline hits, but the project itself will keep being developed afterward.
+🏆 This project originally started as part of the Macathon competition. <u><b>The code related to the competition will stay on a specific branch (named `end_of_macathon_2025`) when the deadline hits</b></u>, but the project itself will keep being developed afterward.
 
 ## 🌟 What is BlabIt?
 BlabIt is a magical toolkit that leverages the power of AI to help you navigate the world of English oral communication. Like a trusted guide through unfamiliar linguistic landscapes, our app offers:
@@ -25,7 +25,9 @@ Our spell-crafters are brewing new enchantments to further empower your linguist
 
 https://blabit.xyz
 
-On desktop, users need to click on screen edges to navigate between pages！
+<u><b>On desktop, users need to click on screen edges to navigate between pages！</b></u>
+<u><b>only desktop avaliable now</b></u>
+
 
 ## 🔴 Critical Bugs
 
