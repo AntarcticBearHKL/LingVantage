@@ -45,6 +45,7 @@ On desktop, users need to click on screen edges to navigate between pages ！
 - Resolve responsive design problems on smaller screens
 - Implement more robust error handling for API connectivity failures
 - Optimize speech recognition for various environmental conditions
+- More language support
 
 ## 🏗️ Architecture
 
