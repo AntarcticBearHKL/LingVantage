@@ -73,20 +73,44 @@ export const useAudioRecorder = () => {
   };
 
   const stopRecording = () => {
-    if (mediaRecorderRef.current && isRecording) {
-      try {
-        setIsRecording(false);
-        mediaRecorderRef.current.stop();
-        // 确保所有轨道都被正确停止
-        mediaRecorderRef.current.stream.getTracks().forEach(track => {
-          track.stop();
-          track.enabled = false;
-        });
-      } catch (error) {
-        console.error('Error stopping recording:', error);
-        setIsRecording(false);
+    return new Promise<Blob | null>((resolve) => {
+      if (mediaRecorderRef.current && isRecording) {
+        try {
+          setIsRecording(false);
+          
+          mediaRecorderRef.current.onstop = () => {
+            try {
+              if (chunksRef.current.length > 0) {
+                const blob = new Blob(chunksRef.current, { 
+                  type: mediaRecorderRef.current?.mimeType || 'audio/webm' 
+                });
+                setAudioBlob(blob); // 更新状态
+                resolve(blob);      // 直接返回 blob
+              } else {
+                console.warn('No audio data chunks were collected during recording');
+                resolve(null);
+              }
+              chunksRef.current = [];
+            } catch (error) {
+              console.error('Error creating audio blob:', error);
+              resolve(null);
+            }
+          };
+          
+          mediaRecorderRef.current.stop();
+          mediaRecorderRef.current.stream.getTracks().forEach(track => {
+            track.stop();
+            track.enabled = false;
+          });
+        } catch (error) {
+          console.error('Error stopping recording:', error);
+          setIsRecording(false);
+          resolve(null);
+        }
+      } else {
+        resolve(null);
       }
-    }
+    });
   };
 
   return {

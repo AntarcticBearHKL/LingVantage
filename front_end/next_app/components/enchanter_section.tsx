@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux'
 
 const EnchanterSection = () => {
   const router = useRouter();
-  const { isRecording, audioBlob, startRecording, stopRecording } = useAudioRecorder();
+  const { isRecording, startRecording, stopRecording } = useAudioRecorder();
   const [isUploading, setIsUploading] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -18,31 +18,34 @@ const EnchanterSection = () => {
   const handleButtonClick = async () => {
     if (isRecording) {
       setIsProcessing(true);
-      await stopRecording();
-      // 等待 audioBlob 更新
-      setTimeout(async () => {
-        if (!audioBlob) {
+      try {
+        // 直接从 stopRecording 获取 blob
+        const recordedBlob = await stopRecording();
+        
+        if (!recordedBlob) {
+          console.warn('No audio blob available after recording stopped');
           setIsProcessing(false);
           return;
         }
-        await handleUpload();
+        
+        // 使用直接获取的 blob 进行上传，不依赖组件状态
+        await handleUploadWithBlob(recordedBlob);
+      } catch (error) {
+        console.error('Recording error:', error);
+      } finally {
         setIsProcessing(false);
-      }, 100);
+      }
     } else {
       startRecording();
     }
   };
 
-  const handleUpload = async () => {
-    if (!audioBlob){
-      console.warn('No audio blob available for upload');
-      return;
-    }
-
+  // 新增一个函数，直接使用传入的 blob
+  const handleUploadWithBlob = async (blob: Blob) => {
     try {
       setIsUploading(true);
       const formData = new FormData();
-      formData.append('audio', audioBlob, 'recording.webm');
+      formData.append('audio', blob, 'recording.webm');
 
       const response = await fetch('https://blabit.xyz/transcribe', {
         method: 'POST',
@@ -58,7 +61,6 @@ const EnchanterSection = () => {
       
       dispatch(setSpeechText(data.text));
       router.push('/enchanter');
-
     } catch (error) {
       console.error('Error uploading audio:', error);
     } finally {

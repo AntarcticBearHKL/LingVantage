@@ -24,11 +24,13 @@ Our spell-crafters are brewing new enchantments to further empower your linguist
 
 https://blabit.xyz
 
+On desktop, users need to click on screen edges to navigate between pages ！
+
 ## 🔴 Critical Bugs
 
-- **Recording Issue**: Recording button requires a second attempt to function properly
+- **Recording Issue**: ⚠️Recording button requires a second attempt to function properly
 - **SECURITY ALERT**: ⚠️ Website certificates have been synchronized to GitHub for development purposes, creating potential security vulnerabilities. This issue will be resolved when certificates expire and are replaced in 90 days.
-- **Cross-Platform Compatibility**: Not tested on all devices across platforms. Desktop works well, but iOS devices currently don't function properly.
+- **Cross-Platform Compatibility**: ⚠️Not tested on all devices across platforms. Desktop works well, but iOS devices currently don't function properly.
 
 ## 🐛 Current Issues
 
