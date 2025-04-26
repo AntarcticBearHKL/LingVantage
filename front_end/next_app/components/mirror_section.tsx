@@ -1,33 +1,32 @@
 "use client";
 
-import { useRouter } from "next/navigation"; // 导入 useRouter
+import { useRouter } from "next/navigation";
 import { useState } from 'react';
-import { useAudioRecorder } from "./audio_recorder"; // 导入自定义的音频录制器
+import { useAudioRecorder } from "./audio_recorder";
 import { setSpeechText } from '@/store/slices/speechSlice'
-import { RootState } from '../store'; // 导入 Redux store 的类型
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 const MirrorSection = () => {
-  const router = useRouter(); // 初始化 useRouter
+  const router = useRouter();
   const { isRecording, audioBlob, startRecording, stopRecording } = useAudioRecorder();
   const [isUploading, setIsUploading] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);  // 添加处理状态
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const dispatch = useDispatch()
 
   const handleButtonClick = async () => {
     if (isRecording) {
-      setIsProcessing(true);  // 开始处理时设置状态
+      setIsProcessing(true);
       await stopRecording();
       // 等待 audioBlob 更新
       setTimeout(async () => {
         if (!audioBlob) {
-          setIsProcessing(false);  // 如果没有音频数据，重置状态
+          setIsProcessing(false);
           return;
         }
         await handleUpload();
-        setIsProcessing(false);  // 处理完成后重置状态
+        setIsProcessing(false);
       }, 100);
     } else {
       startRecording();
@@ -35,7 +34,10 @@ const MirrorSection = () => {
   };
 
   const handleUpload = async () => {
-    if (!audioBlob) return;
+    if (!audioBlob){
+      console.warn('No audio blob available for upload');
+      return;
+    }
 
     try {
       setIsUploading(true);
@@ -54,8 +56,8 @@ const MirrorSection = () => {
       const data = await response.json();
       console.log('Upload successful:', data);
       
-      dispatch(setSpeechText(data.text)); // 更新 Redux store 中的文本
-      router.push('/mirror'); // 上传成功后跳转到结果页面
+      dispatch(setSpeechText(data.text));
+      router.push('/mirror');
 
     } catch (error) {
       console.error('Error uploading audio:', error);
@@ -66,37 +68,80 @@ const MirrorSection = () => {
 
   return (
     <div 
-      className="flex flex-col items-center justify-center min-h-screen w-full p-6"
-      style={{ backgroundColor: 'rgb(167, 184, 208)', width: '100%' }}
+      className="flex flex-col items-center justify-center min-h-screen bg-[rgb(183,198,175)] p-6 relative"
     >
-      <h1 className="text-4xl font-bold text-gray-800 mb-6">
-        The Mother Tongue Mirror
-      </h1>
+      {/* 图片层 - 使用绝对定位作为背景 */}
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-70 z-0 w-4/5">
+        <div className="w-full">
+          <img
+            src="/images/3.jpg"
+            alt="Context Whisperer Logo"
+            className="rounded-lg shadow-md object-cover w-full h-auto"
+          />
+        </div>
+        
+      </div>
 
-      <p className="text-lg text-gray-600 mb-8 max-w-2xl text-center">
-        Transform your native thoughts into elegant expressions, like watching a butterfly emerge from its chrysalis. Each translation comes adorned with crystalline clarity, while key phrases sparkle with detailed explanations - illuminating your path to understanding like stars in the night sky.
-      </p>
+      {/* 重新排版的文字层 */}
+      <div className="absolute z-10 flex flex-col h-full w-full px-8">
+        {/* The Context */}
+        <div className="h-[13%] flex items-end pt-8 pl-8">
+          <h1 className="text-4xl font-bold text-gray-600">
+          Mother Tongue 
+          </h1>
+        </div>
+        
+        {/* Whisperer - 接下来10%, 居中 */}
+        <div className="h-[5%] flex justify-center items-center">
+          <h1 className="text-6xl font-bold text-gray-800">
+          Mirror
+          </h1>
+        </div>
+        
+        {/* 添加填充器空间 */}
+        <div className="h-[40%]"></div>
+        
+        {/* 合并的主题文字和按钮容器 - 占据30%高度 */}
+        <div className="h-[40%] w-full flex flex-col justify-between relative">
+          {/* 玻璃效果背景 */}
+          <span className="absolute inset-0 bg-white/25 backdrop-blur-xl backdrop-filter backdrop-saturate-150 rounded-lg z-0"></span>
+          
+          <div className="flex flex-col h-full p-6 z-10 relative">
+            {/* 主题文字部分 */}
+            <div className="flex items-start w-full h-[50%]">
+              <p className="text-2xl text-gray-800 w-full text-justify">
+              Transform your native thoughts into elegant expressions, like watching a butterfly emerge from its chrysalis. Each translation comes adorned with crystalline clarity, while key phrases sparkle with detailed explanations - illuminating your like stars in the night sky.
 
-      <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
-        <button
-          onClick={handleButtonClick}
-          disabled={isProcessing}
-          className={`px-6 py-3 rounded-lg font-semibold select-none w-full ${
-            isRecording 
-              ? 'bg-black hover:bg-gray-800' 
-              : 'bg-black hover:bg-gray-800'
-          } text-[rgb(223,247,3)] transition ${
-            isProcessing ? 'opacity-50 cursor-not-allowed' : ''
-          }`}
-        >
-          {isProcessing ? 'PROCESSING...' : isRecording ? 'STOP RECORDING' : 'START RECORDING'}
-        </button>
+              </p>
+            </div>
+            
+            {/* 占位空间 - 5%高度 */}
+            <div className="h-[24%]"></div>
+            
+            {/* 按钮部分 */}
+            <div className="flex justify-center w-full h-[15%]">
+              <button
+                onClick={handleButtonClick}
+                disabled={isProcessing}
+                className={`px-6 py-3 text-xl rounded-lg font-semibold select-none w-full max-w-md flex items-center justify-center ${
+                  isRecording 
+                    ? 'bg-black hover:bg-gray-800' 
+                    : 'bg-black hover:bg-gray-800'
+                } text-[rgb(223,247,3)] transition ${
+                  isProcessing ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+              >
+                {isProcessing ? 'PROCESSING...' : isRecording ? 'STOP RECORDING' : 'LET YOUR HEART SPERAK'}
+              </button>
 
-        {isUploading && (
-          <div className="text-gray-600">
-            LOADING...
+              {isUploading && (
+                <div className="text-gray-600 mt-2">
+                  LOADING...
+                </div>
+              )}
+            </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

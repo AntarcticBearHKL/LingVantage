@@ -46,92 +46,27 @@ const FullPageSlider = () => {
       {...handlers}
       style={{ display: "flex", width: "100vw", height: "100dvh", overflow: "hidden", position: "relative", }}
     >
-      <div className="flex flex-row">
-        <div style={{
-          position: "fixed",
-          top: "20px",
-          left: "20px",
-          display: "flex",
-          gap: "10px",
-          zIndex: 1000,
-        }}>
-
-          <button
-            onClick={() => handleSwipe("RIGHT")}
-            disabled={currentPage === 0}
-            style={{
-              padding: "8px 16px",
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
-              color: "#fff",
-              border: "2px solid #fff",
-              borderRadius: "20px",
-              cursor: currentPage === 0 ? "not-allowed" : "pointer",
-              opacity: currentPage === 0 ? 0.5 : 1,
-            }}
-          >
-            ← 上一页
-          </button>
-
-          <button
-            onClick={() => handleSwipe("LEFT")}
-            disabled={currentPage === pages.length - 1}
-            style={{
-              padding: "8px 16px",
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
-              color: "#fff",
-              border: "2px solid #fff",
-              borderRadius: "20px",
-              cursor: currentPage === pages.length - 1 ? "not-allowed" : "pointer",
-              opacity: currentPage === pages.length - 1 ? 0.5 : 1,
-            }}
-          >
-            下一页 →
-          </button>
+      {/* 顶部栏目 */}
+      <div className="fixed top-0 left-0 w-full flex justify-between items-center px-5 py-4 z-10">
+        {/* 语言选择下拉菜单 */}
+        <div>
+          <Dropdown menu={{ items }} placement="bottomLeft">
+            <div className="px-4 py-2 bg-black/50 text-white rounded-full cursor-pointer">
+              Language 🌐
+            </div>
+          </Dropdown>
         </div>
 
-        <Dropdown menu={{ items }} placement="bottomLeft">
-          <div
-            style={{
-              position: "fixed",
-              top: "20px",
-              left: "300px",
-              padding: "8px 16px",
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
-              color: "#fff",
-              border: "2px solid #fff",
-              borderRadius: "20px",
-              cursor: "pointer",
-              zIndex: 1000,
-            }}
-          >
-            Language 🌐
-          </div>
-        </Dropdown>
-
-        <div
-          onClick={() => setDrawerOpen(true)}
-          style={{
-            position: "fixed",
-            top: "20px",
-            right: "20px",
-            width: "50px",
-            height: "50px",
-            borderRadius: "50%",
-            border: "2px solid #fff",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            cursor: "pointer",
-            zIndex: 1000,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center"
-          }}
+        {/* 设置按钮 */}  
+        <div 
+          onClick={() => setDrawerOpen(true)} 
+          className="px-4 py-2 bg-black/50 text-white rounded-full cursor-pointer"
         >
-          <span style={{ color: "#fff" }}>⚙️</span>
+          <span>⚙️</span>
         </div>
-
       </div>
 
-
+      {/* 页面内容部分 */}
       <div
         style={{ display: "flex", transform: `translateX(-${currentPage * 100}vw)`, transition: "transform 0.5s ease", width: `${pages.length * 100}vw`, }} 
       >
@@ -142,6 +77,28 @@ const FullPageSlider = () => {
         ))}
       </div>
 
+        {/* 左右按钮 - 移到屏幕底部 */}
+        <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 flex gap-3 z-10">
+          <button
+            onClick={() => handleSwipe("RIGHT")}
+            disabled={currentPage === 0}
+            className={`px-4 py-2 bg-black/50 text-white border-white rounded-full ${
+              currentPage === 0 ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+            }`}
+          >
+            ← Prev
+          </button>
+
+          <button
+            onClick={() => handleSwipe("LEFT")}
+            disabled={currentPage === pages.length - 1}
+            className={`px-4 py-2 bg-black/50 text-white border-white rounded-full ${
+              currentPage === pages.length - 1 ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+            }`}
+          >
+            Next →
+          </button>
+        </div>
 
       <Drawer
         placement="bottom"
@@ -152,7 +109,7 @@ const FullPageSlider = () => {
         maskClosable={true}
       >
         <h3>Login</h3>
-        <p>这里可以放置你的抽屉内容</p>
+        <p>Your may input your openai api later</p>
       </Drawer>
 
     </div>

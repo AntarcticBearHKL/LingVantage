@@ -8,10 +8,10 @@ export const useAudioRecorder = () => {
 
   const startRecording = async () => {
     try {
+      setIsRecording(true);
       // 添加 iOS Safari 所需的约束
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: {
-          // iOS Safari 需要这些具体参数
           echoCancellation: true,
           noiseSuppression: true,
           autoGainControl: true,
@@ -56,9 +56,9 @@ export const useAudioRecorder = () => {
 
       // 每秒收集一次数据，避免内存问题
       mediaRecorderRef.current.start(1000);
-      setIsRecording(true);
     } catch (error) {
       console.error('Error accessing microphone:', error);
+      setIsRecording(false);
       // 添加更详细的错误处理
       if (error instanceof DOMException) {
         if (error.name === 'NotAllowedError') {
@@ -75,8 +75,8 @@ export const useAudioRecorder = () => {
   const stopRecording = () => {
     if (mediaRecorderRef.current && isRecording) {
       try {
-        mediaRecorderRef.current.stop();
         setIsRecording(false);
+        mediaRecorderRef.current.stop();
         // 确保所有轨道都被正确停止
         mediaRecorderRef.current.stream.getTracks().forEach(track => {
           track.stop();
@@ -84,6 +84,7 @@ export const useAudioRecorder = () => {
         });
       } catch (error) {
         console.error('Error stopping recording:', error);
+        setIsRecording(false);
       }
     }
   };
