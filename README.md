@@ -2,7 +2,7 @@
 
 > *Pages of linguistic enchantment, your speaking magic book unfolds*
 
-BlabIt is your enchanted companion for mastering English conversation, transforming ordinary practice into extraordinary linguistic journeys.
+🏆 This project originally started as part of the Macathon competition. The code related to the competition will stay on a specific branch when the deadline hits, but the project itself will keep being developed afterward.
 
 ## 🌟 What is BlabIt?
 
