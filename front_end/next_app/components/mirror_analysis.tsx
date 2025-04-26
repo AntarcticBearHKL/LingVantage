@@ -14,7 +14,7 @@ const MirrorAnalysis = () => {
     const sendDataToServer = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`https://blabit.xyz:5000/mirror?message=${encodeURIComponent(someData)}`, {
+        const response = await fetch(`https://blabit.xyz/mirror?message=${encodeURIComponent(someData)}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

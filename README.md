@@ -22,7 +22,7 @@ Our spell-crafters are brewing new enchantments to further empower your linguist
 
 ## 🚀 Getting Started
 
-https://blabit.xyz:5000
+https://blabit.xyz
 
 ## 🔴 Critical Bugs
 
