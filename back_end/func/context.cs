@@ -1,6 +1,7 @@
 using System.Text;
 using System.Text.Json;
 using System.Net.Http.Headers;
+using System.IO;
 
 namespace BlabIt.Services;
 
@@ -18,8 +19,15 @@ public class ContextAPI
     public ContextAPI()
     {
         _httpClient = new HttpClient();
-        _apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") 
-            ?? throw new InvalidOperationException("OPENAI_API_KEY environment variable is not set");
+        try
+        {
+            _apiKey = File.ReadAllText("/certs/openai/key").Trim();
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException($"Failed to read OpenAI API key from file: {ex.Message}");
+        }
+        
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiKey);
     }
 

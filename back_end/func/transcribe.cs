@@ -1,4 +1,5 @@
 using System.Net.Http.Headers;
+using System.IO;
 
 namespace BlabIt.Services;
 
@@ -10,8 +11,15 @@ public class TranscribeService
 
     public TranscribeService()
     {
-        _apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") 
-            ?? throw new ArgumentNullException("OPENAI_API_KEY environment variable is not set");
+        try
+        {
+            _apiKey = File.ReadAllText("/certs/openai/key").Trim();
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException($"Failed to read OpenAI API key from file: {ex.Message}");
+        }
+        
         _httpClient = new HttpClient();
         _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _apiKey);
     }
