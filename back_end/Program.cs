@@ -3,9 +3,6 @@ using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure HTTPS redirection and default ports
-builder.WebHost.UseUrls("https://0.0.0.0:5000");
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -14,13 +11,6 @@ builder.Services.AddCors(options =>
              .AllowAnyMethod()
              .AllowAnyHeader();
     });
-});
-
-// Configure HTTPS redirection
-builder.Services.AddHttpsRedirection(options =>
-{
-    options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
-    options.HttpsPort = 5002;
 });
 
 builder.Services.AddOpenApi();
@@ -37,9 +27,6 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 });
-
-// Add HTTPS redirection before other middleware
-app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.MapFallbackToFile("index.html");
