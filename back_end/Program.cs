@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure HTTPS redirection and default ports
-builder.WebHost.UseUrls("http://0.0.0.0:80", "https://0.0.0.0:443");
+builder.WebHost.UseUrls("https://0.0.0.0:5000");
 
 builder.Services.AddCors(options =>
 {
@@ -20,7 +20,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddHttpsRedirection(options =>
 {
     options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
-    options.HttpsPort = 443;
+    options.HttpsPort = 5002;
 });
 
 builder.Services.AddOpenApi();

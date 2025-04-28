@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../store';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { BLABIT_API } from '@/store/const';
 
 const MirrorAnalysis = () => {
   const someData = useSelector((state: RootState) => state.speech.speechText);
@@ -14,7 +15,7 @@ const MirrorAnalysis = () => {
     const sendDataToServer = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`https://blabit.xyz/mirror?message=${encodeURIComponent(someData)}`, {
+        const response = await fetch(BLABIT_API + `/mirror?message=${encodeURIComponent(someData)}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

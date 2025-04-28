@@ -1,0 +1,1 @@
+export const BLABIT_API = 'https://blabit.xyz:5000';

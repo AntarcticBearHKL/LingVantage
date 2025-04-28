@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../store';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { BLABIT_API } from '@/store/const';
 
 const EnchanterAnalysis = () => {
   const someData = useSelector((state: RootState) => state.speech.speechText);
@@ -12,7 +13,7 @@ const EnchanterAnalysis = () => {
   useEffect(() => {
     const sendDataToServer = async () => {
       try {
-        const response = await fetch(`https://blabit.xyz/enchanter?message=${encodeURIComponent(someData)}`, {
+        const response = await fetch(BLABIT_API + `/enchanter?message=${encodeURIComponent(someData)}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

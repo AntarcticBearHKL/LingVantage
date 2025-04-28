@@ -6,6 +6,7 @@ import { useAudioRecorder } from "./audio_recorder";
 import { setSpeechText } from '@/store/slices/speechSlice'
 import { Spin } from 'antd';
 import { useDispatch } from 'react-redux'
+import { BLABIT_API } from "@/store/const";
 
 const EnchanterSection = () => {
   const router = useRouter();
@@ -47,7 +48,7 @@ const EnchanterSection = () => {
       const formData = new FormData();
       formData.append('audio', blob, 'recording.webm');
 
-      const response = await fetch('https://blabit.xyz/transcribe', {
+      const response = await fetch(BLABIT_API + '/transcribe', {
         method: 'POST',
         body: formData,
       });
