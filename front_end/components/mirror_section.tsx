@@ -61,7 +61,7 @@ const MirrorSection = () => {
       console.log('Upload successful:', data);
       
       dispatch(setSpeechText(data.text));
-      router.push('/mirror');
+      router.push('/tongue_mirror');
     } catch (error) {
       console.error('Error uploading audio:', error);
     } finally {

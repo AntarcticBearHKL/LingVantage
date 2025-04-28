@@ -61,7 +61,7 @@ const ContextSection = () => {
       console.log('Upload successful:', data);
       
       dispatch(setSpeechText(data.text));
-      router.push('/context');
+      router.push('/context_whisperer');
     } catch (error) {
       console.error('Error uploading audio:', error);
     } finally {

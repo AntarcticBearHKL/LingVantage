@@ -61,7 +61,7 @@ const EnchanterSection = () => {
       console.log('Upload successful:', data);
       
       dispatch(setSpeechText(data.text));
-      router.push('/enchanter');
+      router.push('/english_enchanter');
     } catch (error) {
       console.error('Error uploading audio:', error);
     } finally {
