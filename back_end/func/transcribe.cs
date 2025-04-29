@@ -14,6 +14,7 @@ public class TranscribeService
         try
         {
             _apiKey = File.ReadAllText("/certs/openai/key").Trim();
+            Console.WriteLine($"OpenAI API key loaded: {_apiKey}");
         }
         catch (Exception ex)
         {
@@ -26,13 +27,19 @@ public class TranscribeService
 
     public async Task<string> TranscribeAudioAsync(IFormFile audioFile)
     {
+        Console.WriteLine('1');
         using var formData = new MultipartFormDataContent();
         using var fileContent = new StreamContent(audioFile.OpenReadStream());
+
+        Console.WriteLine('2');
         
         formData.Add(fileContent, "file", audioFile.FileName);
         formData.Add(new StringContent("whisper-1"), "model");
 
+        Console.WriteLine('3');
+
         var response = await _httpClient.PostAsync(OPENAI_API_URL, formData);
+        Console.WriteLine('4');
         response.EnsureSuccessStatusCode();
 
         var result = await response.Content.ReadFromJsonAsync<TranscriptionResponse>();
