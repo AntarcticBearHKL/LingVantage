@@ -36,12 +36,6 @@ public class TranscribeService
 
 
         var response = await _httpClient.PostAsync(OPENAI_API_URL, formData);
-        
-        // 打印响应内容，无论成功与否
-        var responseContent = await response.Content.ReadAsStringAsync();
-        Console.WriteLine($"OpenAI API Response Status: {response.StatusCode}");
-        Console.WriteLine($"OpenAI API Response Content: {responseContent}");
-
         response.EnsureSuccessStatusCode();
 
         var result = await response.Content.ReadFromJsonAsync<TranscriptionResponse>();
