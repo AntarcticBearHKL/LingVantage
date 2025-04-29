@@ -18,13 +18,11 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
-// Add request logging middleware
+// Add request and response logging middleware
 app.Use(async (context, next) =>
 {
-    // Log request method
+    // Log request method and path
     Console.WriteLine($"Request Method: {context.Request.Method}");
-    
-    // Log request path
     Console.WriteLine($"Request Path: {context.Request.Path}");
 
     // Log query parameters if present
@@ -61,12 +59,39 @@ app.Use(async (context, next) =>
             Console.WriteLine($"Request Body: {requestBodyContent}");
         }
         
-        // Call the next delegate/middleware in the pipeline
-        await next();
+        // Capture the original response body stream
+        var originalResponseBody = context.Response.Body;
+        
+        try
+        {
+            // Create a new memory stream to capture the response
+            using var responseBody = new MemoryStream();
+            context.Response.Body = responseBody;
+            
+            // Call the next middleware in the pipeline
+            await next();
+            
+            // Read the response body
+            responseBody.Seek(0, SeekOrigin.Begin);
+            var responseContent = await new StreamReader(responseBody).ReadToEndAsync();
+            
+            // Log the response
+            Console.WriteLine($"Response Status: {context.Response.StatusCode}");
+            Console.WriteLine($"Response Body: {responseContent}");
+            
+            // Copy the response back to the original stream
+            responseBody.Seek(0, SeekOrigin.Begin);
+            await responseBody.CopyToAsync(originalResponseBody);
+        }
+        finally
+        {
+            // Restore the original response body stream
+            context.Response.Body = originalResponseBody;
+        }
     }
     finally
     {
-        // Restore the original body stream if needed
+        // Restore the original request body stream if needed
         context.Request.Body = originalBodyStream;
     }
 });
