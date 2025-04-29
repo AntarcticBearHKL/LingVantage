@@ -54,6 +54,8 @@ const ContextSection = () => {
       });
 
       if (!response.ok) {
+        const errorData = await response.json();
+        alert(JSON.stringify(errorData));
         throw new Error('Upload failed');
       }
 

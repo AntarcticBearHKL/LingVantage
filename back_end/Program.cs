@@ -1,5 +1,6 @@
 using BlabIt.Services;
 using Microsoft.AspNetCore.HttpOverrides;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,59 @@ builder.Services.AddCors(options =>
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+// Add request logging middleware
+app.Use(async (context, next) =>
+{
+    // Log request method
+    Console.WriteLine($"Request Method: {context.Request.Method}");
+    
+    // Log request path
+    Console.WriteLine($"Request Path: {context.Request.Path}");
+
+    // Log query parameters if present
+    if (context.Request.QueryString.HasValue)
+    {
+        Console.WriteLine($"Query Parameters: {context.Request.QueryString.Value}");
+    }
+    
+    // Read and log request body
+    var originalBodyStream = context.Request.Body;
+    
+    try
+    {
+        var requestBodyContent = string.Empty;
+        
+        if (context.Request.ContentLength > 0)
+        {
+            // Enable buffering to allow reading the body multiple times
+            context.Request.EnableBuffering();
+            
+            // Read the request body
+            using (var reader = new StreamReader(
+                context.Request.Body,
+                encoding: Encoding.UTF8,
+                detectEncodingFromByteOrderMarks: false,
+                leaveOpen: true))
+            {
+                requestBodyContent = await reader.ReadToEndAsync();
+                
+                // Reset the position to the beginning for downstream middleware
+                context.Request.Body.Position = 0;
+            }
+            
+            Console.WriteLine($"Request Body: {requestBodyContent}");
+        }
+        
+        // Call the next delegate/middleware in the pipeline
+        await next();
+    }
+    finally
+    {
+        // Restore the original body stream if needed
+        context.Request.Body = originalBodyStream;
+    }
+});
 
 if (app.Environment.IsDevelopment())
 {
