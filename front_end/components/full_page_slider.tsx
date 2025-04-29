@@ -33,7 +33,6 @@ const FullPageSlider = () => {
   ];
 
   const pages = [
-    { id: -1, content: <Card /> },
     { id: 0, content: <ContextSection /> },
     { id: 1, content: <EnchanterSection /> },
     { id: 2, content: <MirrorSection /> },
