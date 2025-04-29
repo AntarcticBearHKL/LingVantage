@@ -3,8 +3,30 @@ import { useState, useRef } from 'react';
 export const useAudioRecorder = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
+  const [audioFormat, setAudioFormat] = useState<string>('');
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
+
+  // 获取支持的 MIME 类型和文件扩展名
+  const getSupportedAudioFormat = () => {
+    const formats = [
+      { mimeType: 'audio/webm', extension: 'webm' },
+      { mimeType: 'audio/mp4', extension: 'mp4' },
+      { mimeType: 'audio/ogg', extension: 'ogg' },
+      { mimeType: 'audio/wav', extension: 'wav' },
+      { mimeType: 'audio/aac', extension: 'aac' }
+    ];
+
+    // 寻找第一个支持的格式
+    for (const format of formats) {
+      if (MediaRecorder.isTypeSupported(format.mimeType)) {
+        return format;
+      }
+    }
+
+    // 默认格式
+    return { mimeType: '', extension: 'webm' };
+  };
 
   const startRecording = async () => {
     try {
@@ -20,13 +42,20 @@ export const useAudioRecorder = () => {
         }
       });
 
-      // 直接使用 MP4 格式，不考虑其他格式
-      const mimeType = 'audio/mp4';
+      // 检测支持的音频格式
+      const { mimeType, extension } = getSupportedAudioFormat();
+      setAudioFormat(extension);
       
-      mediaRecorderRef.current = new MediaRecorder(stream, {
-        mimeType,
+      const recorderOptions: MediaRecorderOptions = {
         audioBitsPerSecond: 128000
-      });
+      };
+      
+      // 仅当有支持的 mimeType 时添加
+      if (mimeType) {
+        recorderOptions.mimeType = mimeType;
+      }
+      
+      mediaRecorderRef.current = new MediaRecorder(stream, recorderOptions);
       
       // 设置较小的时间片，提高兼容性
       mediaRecorderRef.current.ondataavailable = (event) => {
@@ -38,7 +67,8 @@ export const useAudioRecorder = () => {
       mediaRecorderRef.current.onstop = () => {
         try {
           if (chunksRef.current.length > 0) {
-            const blob = new Blob(chunksRef.current, { type: mimeType });
+            const actualMimeType = mediaRecorderRef.current?.mimeType || mimeType || 'audio/webm';
+            const blob = new Blob(chunksRef.current, { type: actualMimeType });
             setAudioBlob(blob);
           } else {
             console.warn('No audio data chunks were collected during recording');
@@ -76,9 +106,8 @@ export const useAudioRecorder = () => {
           mediaRecorderRef.current.onstop = () => {
             try {
               if (chunksRef.current.length > 0) {
-                const blob = new Blob(chunksRef.current, { 
-                  type: mediaRecorderRef.current?.mimeType || 'audio/webm' 
-                });
+                const actualMimeType = mediaRecorderRef.current?.mimeType || 'audio/webm';
+                const blob = new Blob(chunksRef.current, { type: actualMimeType });
                 setAudioBlob(blob); // 更新状态
                 resolve(blob);      // 直接返回 blob
               } else {
@@ -111,6 +140,7 @@ export const useAudioRecorder = () => {
   return {
     isRecording,
     audioBlob,
+    audioFormat, // 返回文件扩展名供调用者使用
     startRecording,
     stopRecording
   };

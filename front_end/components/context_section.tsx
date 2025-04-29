@@ -10,7 +10,7 @@ import { BLABIT_API } from "@/store/const";
 
 const ContextSection = () => {
   const router = useRouter();
-  const { isRecording, startRecording, stopRecording } = useAudioRecorder();
+  const { isRecording, startRecording, stopRecording, audioFormat } = useAudioRecorder();
   const [isUploading, setIsUploading] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -41,12 +41,16 @@ const ContextSection = () => {
     }
   };
 
-  // 新增一个函数，直接使用传入的 blob
+  // 修改函数，使用动态文件后缀名
   const handleUploadWithBlob = async (blob: Blob) => {
     try {
       setIsUploading(true);
       const formData = new FormData();
-      formData.append('audio', blob, 'recording.mp4');
+      // 使用从 useAudioRecorder 获取的 audioFormat 作为文件扩展名
+      const filename = `recording.${audioFormat || 'webm'}`;
+      formData.append('audio', blob, filename);
+
+      console.log(`Uploading audio file with name: ${filename}`);
 
       const response = await fetch(BLABIT_API + '/transcribe', {
         method: 'POST',
