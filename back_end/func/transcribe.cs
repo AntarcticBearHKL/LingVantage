@@ -42,7 +42,9 @@ public class TranscribeService
         Console.WriteLine('4');
         response.EnsureSuccessStatusCode();
 
+        Console.WriteLine('5');
         var result = await response.Content.ReadFromJsonAsync<TranscriptionResponse>();
+        Console.WriteLine('6');
         return result?.Text ?? string.Empty;
     }
 }
