@@ -46,7 +46,7 @@ const ContextSection = () => {
     try {
       setIsUploading(true);
       const formData = new FormData();
-      formData.append('audio', blob, 'recording.webm');
+      formData.append('audio', blob, 'recording.mp4');
 
       const response = await fetch(BLABIT_API + '/transcribe', {
         method: 'POST',

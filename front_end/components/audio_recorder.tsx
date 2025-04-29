@@ -20,14 +20,9 @@ export const useAudioRecorder = () => {
         }
       });
 
-      // 检查浏览器支持的 MIME 类型
-      const mimeType = [
-        'audio/webm',
-        'audio/mp4',
-        'audio/aac',
-        'audio/ogg'
-      ].find(type => MediaRecorder.isTypeSupported(type)) || 'audio/webm';
-
+      // 直接使用 MP4 格式，不考虑其他格式
+      const mimeType = 'audio/mp4';
+      
       mediaRecorderRef.current = new MediaRecorder(stream, {
         mimeType,
         audioBitsPerSecond: 128000
