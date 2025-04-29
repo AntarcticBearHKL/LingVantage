@@ -27,24 +27,24 @@ public class TranscribeService
 
     public async Task<string> TranscribeAudioAsync(IFormFile audioFile)
     {
-        Console.WriteLine('1');
         using var formData = new MultipartFormDataContent();
         using var fileContent = new StreamContent(audioFile.OpenReadStream());
 
-        Console.WriteLine('2');
         
         formData.Add(fileContent, "file", audioFile.FileName);
         formData.Add(new StringContent("whisper-1"), "model");
 
-        Console.WriteLine('3');
 
         var response = await _httpClient.PostAsync(OPENAI_API_URL, formData);
-        Console.WriteLine('4');
+        
+        // 打印响应内容，无论成功与否
+        var responseContent = await response.Content.ReadAsStringAsync();
+        Console.WriteLine($"OpenAI API Response Status: {response.StatusCode}");
+        Console.WriteLine($"OpenAI API Response Content: {responseContent}");
+
         response.EnsureSuccessStatusCode();
 
-        Console.WriteLine('5');
         var result = await response.Content.ReadFromJsonAsync<TranscriptionResponse>();
-        Console.WriteLine('6');
         return result?.Text ?? string.Empty;
     }
 }
