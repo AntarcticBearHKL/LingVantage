@@ -52,7 +52,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col h-dvh w-dvw">
+    <div className="fixed flex flex-col h-dvh w-dvw bg-black">
 
 
       {/* 上方提醒 */}
