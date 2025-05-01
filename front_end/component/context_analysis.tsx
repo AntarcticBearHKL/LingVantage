@@ -1,21 +1,19 @@
 "use client";
 
 import { useSelector } from 'react-redux'
-import { RootState } from '../store';
+import { RootState } from './store';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { BLABIT_API } from '@/store/const';
+import { BLABIT_API } from '@/component/const/const';
 
-const MirrorAnalysis = () => {
+const ContextAnalysis = () => {
   const someData = useSelector((state: RootState) => state.speech.speechText);
-  const [translations, setTranslations] = useState<[string, string][]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [responses, setResponses] = useState<[string, string][]>([]);
 
   useEffect(() => {
     const sendDataToServer = async () => {
-      setIsLoading(true);
       try {
-        const response = await fetch(BLABIT_API + `/mirror?message=${encodeURIComponent(someData)}`, {
+        const response = await fetch(BLABIT_API + `/context?message=${encodeURIComponent(someData)}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -28,23 +26,23 @@ const MirrorAnalysis = () => {
         
         const data = await response.json();
         
-        // Parse the response string into an array of [motherTongue, englishTranslation] pairs
-        console.log('Raw server response:', data.response);
-        setTranslations(JSON.parse(data.response));
+        setResponses(JSON.parse(data.response));
         
-        console.log('Server response:', JSON.parse(data.response));
+        console.log('Server response:', responses);
 
       } catch (error) {
         console.error('Error sending data:', error);
-      } finally {
-        setIsLoading(false);
       }
     };
 
     if (someData) {
       sendDataToServer();
     }
-  }, [someData]); // Add someData as a dependency to re-run when it changes
+  }, []);
+
+  // Filter responses for recommended and possible scenarios
+  const recommendedResponses = responses.filter(response => response[0] === "Recommended Response");
+  const possibleScenarios = responses.filter(response => response[0] === "Possible Scenario");
 
   return (
     <div className="w-full min-h-screen relative">
@@ -62,7 +60,7 @@ const MirrorAnalysis = () => {
         <div 
           className="absolute inset-0"
           style={{
-            backgroundColor: 'rgb(167,184,208)',
+            backgroundColor: 'rgb(183,198,175)',
             mixBlendMode: 'soft-light',
             opacity: 0.85,
           }}
@@ -80,9 +78,9 @@ const MirrorAnalysis = () => {
             </Link>
           </div>
           
-          {/* Original text heading */}
+          {/* IN THE CONTEXT OF heading */}
           <h2 className="text-xl font-semibold text-gray-800 text-left mb-4">
-            YOUR TEXT
+            IN THE CONTEXT OF
           </h2>
           
           {/* Quote with someData */}
@@ -94,32 +92,41 @@ const MirrorAnalysis = () => {
             </h1>
           </div>
           
-          {/* Translations Section */}
+          {/* Recommended Responses Section */}
           <h3 className="text-xl font-semibold text-gray-800 text-left mb-4">
-            WERE IT TO BE TRANSLATED THIS WAY:
+            YOU SHOULD SAY
           </h3>
           
-          {isLoading ? (
-            <div className="flex justify-center items-center py-10">
-              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-gray-900"></div>
-            </div>
-          ) : (
-            <div className="w-full flex flex-col items-center mb-8 pb-4">
-              {translations.map((pair, index) => (
-                <div 
-                  key={index} 
-                  className="flex flex-col p-4 rounded-lg shadow mb-4 w-full backdrop-filter backdrop-blur-md bg-white/30 border border-white/40"
-                >
-                  <p className="text-lg font-medium text-gray-800 mb-2">{pair[0]}</p>
-                  <p className="text-lg text-gray-600 italic">{pair[1]}</p>
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="w-full flex flex-col items-center mb-8">
+            {recommendedResponses.map((response, index) => (
+              <div 
+                key={index} 
+                className="flex flex-col p-4 rounded-lg shadow mb-2 w-full backdrop-filter backdrop-blur-md bg-white/30 border border-white/40"
+              >
+                <p className="text-center font-medium text-gray-800">{response[1]}</p>
+              </div>
+            ))}
+          </div>
+          
+          {/* Possible Scenarios Section */}
+          <h3 className="text-xl font-semibold text-gray-800 text-left mb-4">
+            POSSIBLE SCENARIOS
+          </h3>
+          
+          <div className="w-full flex flex-col items-center pb-8">
+            {possibleScenarios.map((scenario, index) => (
+              <div 
+                key={index} 
+                className="flex flex-col p-4 rounded-lg shadow mb-2 w-full backdrop-filter backdrop-blur-md bg-white/30 border border-white/40"
+              >
+                <p className="text-center font-medium text-gray-800">{scenario[1]}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default MirrorAnalysis;
+export default ContextAnalysis;

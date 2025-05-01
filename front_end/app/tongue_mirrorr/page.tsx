@@ -1,4 +1,4 @@
-import MirrorAnalysis from "@/components/mirror_analysis";
+import MirrorAnalysis from "@/component/mirror_analysis";
 
 export default function MirrorPage() {
     return <MirrorAnalysis />;

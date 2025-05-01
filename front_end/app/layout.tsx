@@ -1,27 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import { ReduxProvider } from '../store/provider';
+import { ReduxProvider } from '../component/store/provider';
 
 export const metadata: Metadata = {
   title: "BlabIt✨",
   description: "Pages of linguistic enchantment, your speaking magic book unfolds",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({children,}: Readonly<{children: React.ReactNode;}>) {
   return (
     <html lang="en">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-      </head>
-      <body
-        className={'antialiased'}
-      >
+      <body>
         <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>

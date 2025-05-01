@@ -1,30 +1,13 @@
 @import "tailwindcss";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 @font-face {
-  font-family: 'Jaini';
-  src: url('/fonts/Jaini-Regular.ttf') format('truetype');
-  font-weight: normal;
+  font-family: "Jaini";
+  src: url("/fonts/Jaini-Regular.ttf") format("truetype");
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: 'Jaini', Arial, Helvetica, sans-serif;
-}
-
-/* 添加到文件底部 */
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  .safe-bottom {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
+@theme {
+  --font-jaini: "Jaini", sans-serif; 
 }

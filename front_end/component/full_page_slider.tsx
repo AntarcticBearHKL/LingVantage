@@ -8,7 +8,6 @@ import type { MenuProps } from "antd";
 import ContextSection from "./context_section";
 import EnchanterSection from "./enchanter_section";
 import MirrorSection from "./mirror_section";
-import Card from "./card";
 
 // Add CSS classes for non-selectable text
 const noSelectStyles = {

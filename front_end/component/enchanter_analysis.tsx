@@ -1,10 +1,10 @@
 "use client";
 
 import { useSelector } from 'react-redux'
-import { RootState } from '../store';
+import { RootState } from './store';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { BLABIT_API } from '@/store/const';
+import { BLABIT_API } from '@/component/const/const';
 
 const EnchanterAnalysis = () => {
   const someData = useSelector((state: RootState) => state.speech.speechText);

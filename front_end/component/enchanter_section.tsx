@@ -3,12 +3,12 @@
 import { useRouter } from "next/navigation";
 import { useState } from 'react';
 import { useAudioRecorder } from "./audio_recorder";
-import { setSpeechText } from '@/store/slices/speechSlice'
+import { setSpeechText } from '@/component/store/reducer/speech'
 import { Spin } from 'antd';
 import { useDispatch } from 'react-redux'
-import { BLABIT_API } from "@/store/const";
+import { BLABIT_API } from "@/component/const/const";
 
-const MirrorSection = () => {
+const EnchanterSection = () => {
   const router = useRouter();
   const { isRecording, startRecording, stopRecording } = useAudioRecorder();
   const [isUploading, setIsUploading] = useState(false);
@@ -61,7 +61,7 @@ const MirrorSection = () => {
       console.log('Upload successful:', data);
       
       dispatch(setSpeechText(data.text));
-      router.push('/tongue_mirror');
+      router.push('/english_enchanter');
     } catch (error) {
       console.error('Error uploading audio:', error);
     } finally {
@@ -71,29 +71,29 @@ const MirrorSection = () => {
 
   return (
     <div 
-      className="flex flex-col items-center justify-center min-h-screen bg-[rgb(167,184,208)] p-0 relative"
+      className="flex flex-col items-center justify-center min-h-screen bg-[rgb(181,180,162)] p-0 relative"
     >
       {/* 全屏加载动画 */}
       {isUploading && (
-        <div className="fixed inset-0 flex items-center justify-center bg-[rgba(167,184,208,0.8)] z-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-[rgba(181,180,162,0.8)] z-50">
           <Spin 
             size="large" 
             tip="Processing..." 
             style={{ 
               color: '#8B4513',
             }} 
-            fullscreen
+            fullscreen 
           />
         </div>
       )}
-
+      
       {/* 内容容器 - 添加最大宽度并居中 */}
       <div className="w-full max-w-[800px] mx-auto relative h-full min-h-screen">
         {/* 图片层 - 使用绝对定位作为背景 */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-70 z-0 w-4/5">
           <div className="w-full">
             <img
-              src="/images/3.jpg"
+              src="/images/2.jpg"
               alt="Context Whisperer Logo"
               className="rounded-lg shadow-md object-cover w-full h-auto"
             />
@@ -105,14 +105,14 @@ const MirrorSection = () => {
           {/* The Context */}
           <div className="h-[13%] flex items-end pt-8 pl-8">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-600">
-              Mother Tongue 
+              English Enhancement 
             </h1>
           </div>
           
           {/* Whisperer - 接下来10%, 居中 */}
           <div className="h-[5%] flex justify-center items-center">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-800">
-              Mirror
+              Enchanter
             </h1>
           </div>
           
@@ -128,7 +128,7 @@ const MirrorSection = () => {
               {/* 主题文字部分 - 占据容器的65% */}
               <div className="flex-1 min-h-0 mb-8 flex items-center">
                 <p className="text-base sm:text-xl md:text-2xl text-gray-800 w-full text-justify">
-                Transform your native thoughts into elegant expressions, like watching a butterfly emerge from its chrysalis. Each translation comes adorned with crystalline clarity, while key phrases sparkle with detailed explanations - illuminating your path to understanding like stars in the night sky.
+                  Your words are precious gems that deserve to shine their brightest. Let us polish them to perfection, revealing their true native brilliance. Grammar, vocabulary, and structure blend together in harmony, as we craft expressions that flow as smoothly as a mountain stream.
                 </p>
               </div>
               
@@ -137,7 +137,7 @@ const MirrorSection = () => {
                 <button
                   onClick={handleButtonClick}
                   disabled={isProcessing}
-                  className={`px-6 py-3 text-lg sm:text-xl md:text-2xl rounded-lg font-semibold select-none w-full shadow-lg flex items-center justify-center bg-black hover:bg-gray-800 text-[rgb(167,184,208)] transition-colors ${
+                  className={`px-6 py-3 text-lg sm:text-xl md:text-2xl rounded-lg font-semibold select-none w-full shadow-lg flex items-center justify-center bg-black hover:bg-gray-800 text-[rgb(181,180,162)] transition-colors ${
                     isProcessing ? 'opacity-50 cursor-not-allowed' : ''
                   }`}
                 >
@@ -152,4 +152,4 @@ const MirrorSection = () => {
   );
 };
 
-export default MirrorSection;
+export default EnchanterSection;

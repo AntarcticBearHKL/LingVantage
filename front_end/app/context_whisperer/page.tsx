@@ -1,4 +1,4 @@
-import ContextAnalysis from "@/components/context_analysis";
+import ContextAnalysis from "@/component/context_analysis";
 
 export default function ContextPage() {
     return <ContextAnalysis />;

@@ -1,19 +1,21 @@
 "use client";
 
 import { useSelector } from 'react-redux'
-import { RootState } from '../store';
+import { RootState } from './store';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { BLABIT_API } from '@/store/const';
+import { BLABIT_API } from '@/component/const/const';
 
-const ContextAnalysis = () => {
+const MirrorAnalysis = () => {
   const someData = useSelector((state: RootState) => state.speech.speechText);
-  const [responses, setResponses] = useState<[string, string][]>([]);
+  const [translations, setTranslations] = useState<[string, string][]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const sendDataToServer = async () => {
+      setIsLoading(true);
       try {
-        const response = await fetch(BLABIT_API + `/context?message=${encodeURIComponent(someData)}`, {
+        const response = await fetch(BLABIT_API + `/mirror?message=${encodeURIComponent(someData)}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -26,23 +28,23 @@ const ContextAnalysis = () => {
         
         const data = await response.json();
         
-        setResponses(JSON.parse(data.response));
+        // Parse the response string into an array of [motherTongue, englishTranslation] pairs
+        console.log('Raw server response:', data.response);
+        setTranslations(JSON.parse(data.response));
         
-        console.log('Server response:', responses);
+        console.log('Server response:', JSON.parse(data.response));
 
       } catch (error) {
         console.error('Error sending data:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     if (someData) {
       sendDataToServer();
     }
-  }, []);
-
-  // Filter responses for recommended and possible scenarios
-  const recommendedResponses = responses.filter(response => response[0] === "Recommended Response");
-  const possibleScenarios = responses.filter(response => response[0] === "Possible Scenario");
+  }, [someData]); // Add someData as a dependency to re-run when it changes
 
   return (
     <div className="w-full min-h-screen relative">
@@ -60,7 +62,7 @@ const ContextAnalysis = () => {
         <div 
           className="absolute inset-0"
           style={{
-            backgroundColor: 'rgb(183,198,175)',
+            backgroundColor: 'rgb(167,184,208)',
             mixBlendMode: 'soft-light',
             opacity: 0.85,
           }}
@@ -78,9 +80,9 @@ const ContextAnalysis = () => {
             </Link>
           </div>
           
-          {/* IN THE CONTEXT OF heading */}
+          {/* Original text heading */}
           <h2 className="text-xl font-semibold text-gray-800 text-left mb-4">
-            IN THE CONTEXT OF
+            YOUR TEXT
           </h2>
           
           {/* Quote with someData */}
@@ -92,41 +94,32 @@ const ContextAnalysis = () => {
             </h1>
           </div>
           
-          {/* Recommended Responses Section */}
+          {/* Translations Section */}
           <h3 className="text-xl font-semibold text-gray-800 text-left mb-4">
-            YOU SHOULD SAY
+            WERE IT TO BE TRANSLATED THIS WAY:
           </h3>
           
-          <div className="w-full flex flex-col items-center mb-8">
-            {recommendedResponses.map((response, index) => (
-              <div 
-                key={index} 
-                className="flex flex-col p-4 rounded-lg shadow mb-2 w-full backdrop-filter backdrop-blur-md bg-white/30 border border-white/40"
-              >
-                <p className="text-center font-medium text-gray-800">{response[1]}</p>
-              </div>
-            ))}
-          </div>
-          
-          {/* Possible Scenarios Section */}
-          <h3 className="text-xl font-semibold text-gray-800 text-left mb-4">
-            POSSIBLE SCENARIOS
-          </h3>
-          
-          <div className="w-full flex flex-col items-center pb-8">
-            {possibleScenarios.map((scenario, index) => (
-              <div 
-                key={index} 
-                className="flex flex-col p-4 rounded-lg shadow mb-2 w-full backdrop-filter backdrop-blur-md bg-white/30 border border-white/40"
-              >
-                <p className="text-center font-medium text-gray-800">{scenario[1]}</p>
-              </div>
-            ))}
-          </div>
+          {isLoading ? (
+            <div className="flex justify-center items-center py-10">
+              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-gray-900"></div>
+            </div>
+          ) : (
+            <div className="w-full flex flex-col items-center mb-8 pb-4">
+              {translations.map((pair, index) => (
+                <div 
+                  key={index} 
+                  className="flex flex-col p-4 rounded-lg shadow mb-4 w-full backdrop-filter backdrop-blur-md bg-white/30 border border-white/40"
+                >
+                  <p className="text-lg font-medium text-gray-800 mb-2">{pair[0]}</p>
+                  <p className="text-lg text-gray-600 italic">{pair[1]}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default ContextAnalysis;
+export default MirrorAnalysis;

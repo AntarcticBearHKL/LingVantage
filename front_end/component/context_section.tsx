@@ -3,10 +3,10 @@
 import { useRouter } from "next/navigation";
 import { useState } from 'react';
 import { useAudioRecorder } from "./audio_recorder";
-import { setSpeechText } from '@/store/slices/speechSlice'
+import { setSpeechText } from '@/component/store/reducer/speech'
 import { Spin } from 'antd';
 import { useDispatch } from 'react-redux'
-import { BLABIT_API } from "@/store/const";
+import { BLABIT_API } from "@/component/const/const";
 
 const ContextSection = () => {
   const router = useRouter();

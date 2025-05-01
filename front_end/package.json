@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack --experimental-https -H 0.0.0.0",
+    "dev": "next dev --experimental-https -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -14,10 +14,8 @@
     "autoprefixer": "^10.4.21",
     "framer-motion": "^12.9.1",
     "next": "15.3.1",
-    "postcss": "^8.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-media-recorder": "^1.7.1",
     "react-redux": "^9.2.0",
     "react-swipeable": "^7.0.2"
   },
@@ -30,6 +28,7 @@
     "cross-env": "^7.0.3",
     "eslint": "^9",
     "eslint-config-next": "15.3.1",
+    "postcss": "^8.5.3",
     "tailwindcss": "^4.1.4",
     "typescript": "^5"
   }
