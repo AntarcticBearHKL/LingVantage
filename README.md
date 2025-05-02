@@ -1,4 +1,4 @@
-<img src="front_end/next_app/public/images/logo.jpg" alt="BlabIt Logo" width="300" />
+<img src="front_end/public/images/logo.jpg" alt="BlabIt Logo" width="300" />
 
 # 🗣️ BlabIt ✨
 
@@ -23,7 +23,7 @@ Our spell-crafters are brewing new enchantments to further empower your linguist
 
 ## 🚀 Getting Started
 
-https://balbit.xyz 
+https://balbit.xyz please do not use eduroam
 
 ## 🔴 Critical Bugs
 
