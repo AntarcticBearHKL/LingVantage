@@ -23,7 +23,7 @@ Our spell-crafters are brewing new enchantments to further empower your linguist
 
 ## 🚀 Getting Started
 
-https://balbit.xyz 
+https://balbit.xyz please do not use eduroam
 
 ## 🔴 Critical Bugs
 
