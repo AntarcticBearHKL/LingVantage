@@ -6,7 +6,7 @@ import { Carousel, Drawer, Dropdown, message } from "antd";
 import type { MenuProps } from "antd";
 import type { CarouselRef } from "antd/es/carousel";
 
-import MagicCard from "@/component/home/home_magic_card";
+import MagicCard from "@/component/home/magic_card";
 
 import * as CardInfo from "@/component/const/card_info";
 
@@ -38,7 +38,7 @@ export default function Home() {
     }
   };
 
-  const handle_side_click = (direction: string, event: React.MouseEvent) => {
+  const handle_side_click = (direction: string) => {
     handleSwipe(direction);
   };
 
@@ -52,7 +52,7 @@ export default function Home() {
   };
 
   return (
-    <div className="fixed flex flex-col h-dvh w-dvw">
+    <div className="fixed flex flex-col h-dvh w-dvw select-none">
 
 
       {/* 上方提醒 */}
@@ -85,14 +85,14 @@ export default function Home() {
 
       {/* 左侧点击区域 */}
       <div className="fixed left-0 top-0 w-1/4 h-dvh z-5"
-        onClick={(e) => handle_side_click("RIGHT", e)}
+        onClick={() => handle_side_click("RIGHT")}
         style={{ opacity: 0 }}
       ></div>
       
 
       {/* 右侧点击区域 */}
       <div className="fixed right-0 top-0 w-1/4 h-dvh z-5"
-        onClick={(e) => handle_side_click("LEFT", e)}
+        onClick={() => handle_side_click("LEFT")}
         style={{ opacity: 0 }}
       ></div>
 
