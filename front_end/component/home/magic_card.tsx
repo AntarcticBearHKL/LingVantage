@@ -85,16 +85,14 @@ export default function MagicCard({ card_info }: MagicCardProps) {
     >
       {/* 全屏加载动画 */}
       {isUploading && (
-        <div className="fixed inset-0 flex items-center justify-center bg-[rgba(183,198,175,0.8)] z-50">
-          <Spin 
-            size="large" 
-            tip="Processing..." 
-            style={{ 
-              color: '#8B4513',
-            }}
-            fullscreen 
-          />
-        </div>
+      <div className="absolute h-dvh w-dvw flex flex-col justify-center items-center bg-[rgba(183,198,175,0.8)] z-50">
+        <Spin
+          size="large" 
+          style={{ 
+            color: '#8B4513',
+          }}
+        />
+      </div>
       )}
 
       {/* 背景图片 */}
@@ -112,7 +110,7 @@ export default function MagicCard({ card_info }: MagicCardProps) {
 
       {/* 文字层 */}
       <div className='absolute flex flex-col w-dvw h-dvh font-Rubik'>
-        <div className="grow-13"></div>
+        <div className="grow-16"></div>
 
         <div className="grow-1 text-start align-middle text-3xl text-[rgb(50,50,50)] font-bold px-2">
           {card_info.title_line_one}

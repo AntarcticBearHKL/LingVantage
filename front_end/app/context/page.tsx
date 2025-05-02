@@ -35,7 +35,7 @@ const ContextAnalysis = () => {
       },
     });
     
-    console.log('Server response:', responses);
+    console.log('Server response:', response);
     
     const data = await response.json();  
     setResponses(JSON.parse(data.response));
@@ -86,10 +86,10 @@ const ContextAnalysis = () => {
           </h2>
           
           {/* 输入的内容 */}
-          <div className="w-full text-center text-lg font-Rubik font-bold">
-            <span className="text-2xl">&ldquo;</span>
+          <div className="flex flex-row justify-between w-full text-center text-lg font-Rubik font-bold">
+            <span className="self-center text-3xl">&ldquo;</span>
             {speechText}
-            <span className="text-2xl">&rdquo;</span>
+            <span className="self-center text-3xl">&rdquo;</span>
           </div>
         </div>
         

@@ -1,5 +1,211 @@
-import EnchanterAnalysis from "./enchanter_analysis";
+"use client";
 
-export default function EnchanterPage() {
-    return <EnchanterAnalysis />;
-}
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+
+import { Skeleton } from 'antd';
+
+import { BLABIT_API } from '@/component/const/const';
+
+import { RootState } from '@/component/store';
+import { setSpeechProcess } from '@/component/store/reducer/speech';
+
+const ContextAnalysis = () => {
+  const dispatch = useDispatch();
+  const speechText = useSelector((state: RootState) => state.speech.speechText);
+  const speechProcess = useSelector((state: RootState) => state.speech.speechProcess);
+  const [analysisData, setAnalysisData] = useState<[string, string, string][]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    console.log('Speech text:', speechProcess);
+    if (!speechProcess) {
+      dispatch(setSpeechProcess(true));
+      console.log('Processing speech data');
+      sendDataToServer();
+    }
+  }, []);
+
+  const sendDataToServer = async () => {
+    const response = await fetch(BLABIT_API + `/enchanter?message=${encodeURIComponent(speechText)}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    console.log('Server response:', response);
+    
+    const data = await response.json();  
+    setAnalysisData(JSON.parse(data.response));
+
+    setLoading(false);
+  };
+
+  const idiomaticContent = analysisData.find(item => item[0] === "idiomatic")?.[1] || "";
+  const wordErrors = analysisData.filter(item => item[0] === "wordError");
+  const grammarErrors = analysisData.filter(item => item[0] === "grammarError");
+  const logicErrors = analysisData.filter(item => item[0] === "logicError");
+  const wordChoiceErrors = analysisData.filter(item => item[0] === "wordChoice");
+
+  return (
+    <div className="fixed flex flex-col h-dvh w-dvw select-none bg-white overflow-scroll">
+      {/* 背景图片 */}
+      <div className="fixed h-dvh w-dvw opacity-25 z-0">
+        {/* 背景 */}
+        <img className="w-full h-full object-fill" 
+          src="/images/b.jpg" 
+          alt=""
+        />
+
+        {/* 滤镜 */}
+        <div className="absolute z-1"
+          style={{
+            backgroundColor: 'rgb(183,198,175)',
+            mixBlendMode: 'soft-light',
+            opacity: 1,
+          }}
+        ></div>
+      </div>
+      
+      {/* 主体内容 */}
+      <div className="relative flex flex-col h-dvh w-dvw z-10 ">
+
+        {/* 返回按钮 */}
+        <div className="sticky top-0 flex w-full pt-3 pl-1 z-20">
+          <Link className="flex w-20 h-10 items-center justify-center rounded-full bg-black/70 text-white font-Rubik font-light"
+            href="/">
+            BACK
+          </Link>
+        </div>
+        
+        {/* 顶部标题 展示输入内容 */}
+        <div className="flex flex-col px-2 mt-5">
+          {/* 标题 */}
+          <h2 className="mb-4 text-xl text-gray-800 text-left font-Rubik font-bold">
+            You Have Said
+          </h2>
+          
+          {/* 输入的内容 */}
+          <div className="flex flex-row justify-between w-full text-center text-lg font-Rubik font-bold">
+            <span className="self-center text-3xl">&ldquo;</span>
+            {speechText}
+            <span className="self-center text-3xl">&rdquo;</span>
+          </div>
+        </div>
+        
+        {/* 正宗说法 */}
+        {idiomaticContent && (
+        <div className="flex flex-col px-2 mt-5">
+          {/* 正宗说法 标题*/}
+          <div className="mb-4 text-xl text-gray-800 text-left font-Rubik font-bold">
+            Idiomatic Version
+          </div>
+
+          {/* 正宗说法 内容*/}
+          <div className="flex flex-col p-4 rounded-lg shadow mb-6 w-full backdrop-filter backdrop-blur-md bg-white/30 border border-white/40">
+            <p className="text-left font-Rubik font-light">
+              {idiomaticContent}
+            </p>
+          </div>
+        </div>
+        )}
+          
+        {/* 用词错误 */}
+        {wordErrors.length > 0 && (
+        <div className="flex flex-col px-2 mt-5">
+          <div className="mb-4 text-xl text-gray-800 text-left font-Rubik font-bold">
+            There&apos;s a Slight Wording Issue Here
+          </div>
+
+          {wordErrors.map((error, index) => (
+            <div 
+              key={index} 
+              className="flex flex-col p-4 rounded-lg shadow mb-2 w-full backdrop-filter backdrop-blur-md bg-white/30 border border-white/40"
+            >
+              <div className="flex justify-between">
+                <p className="text-left font-Rubik font-light line-through">{error[1]}</p>
+                <p className="text-center font-Rubik font-light">➡️</p>
+                <p className="text-right font-Rubik font-light">{error[2]}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        )}
+          
+        {/* 语法错误 */}
+        {grammarErrors.length > 0 && (
+        <div className="flex flex-col px-2 mt-5">
+
+          <div className="mb-4 text-xl text-gray-800 text-left font-Rubik font-bold">
+            Make It Smoother
+          </div>
+
+          {grammarErrors.map((error, index) => (
+            <div 
+              key={index} 
+              className="flex flex-col p-4 rounded-lg shadow mb-6 w-full backdrop-filter backdrop-blur-md bg-white/30 border border-white/40"
+            >
+              <div className="flex flex-row w-[100%]">
+                <p className="text-left font-Rubik font-light">{error[1]}</p>
+                <p className="text-center font-Rubik font-light">➡️</p>
+                <p className="text-right font-Rubik font-light">{error[2]}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        )}
+          
+        {/* 逻辑错误 */}
+        {logicErrors.length > 0 && (
+        <div className="flex flex-col px-2 mt-5">
+
+          <div className="mb-4 text-xl text-gray-800 text-left font-Rubik font-bold">
+            Logic Could Be Better
+          </div>
+
+          {logicErrors.map((error, index) => (
+            <div 
+              key={index} 
+              className="flex flex-col p-4 rounded-lg shadow mb-6 w-full backdrop-filter backdrop-blur-md bg-white/30 border border-white/40"
+            >
+              <div className="flex flex-row w-[100%]">
+                <p className="grow-8 text-left font-Rubik font-light">{error[1]}</p>
+                <p className="grow-1 text-center font-Rubik font-light">➡️</p>
+                <p className="grow-8 text-right font-Rubik font-light">{error[2]}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        )}
+        
+        {/* 选词提升 */}
+        {wordChoiceErrors.length > 0 && (
+        <div className="flex flex-col px-2 mt-5">
+
+          <div className="mb-4 text-xl text-gray-800 text-left font-Rubik font-bold">
+            Make It Clear
+          </div>
+
+          {wordChoiceErrors.map((error, index) => (
+            <div 
+              key={index} 
+              className="flex flex-col p-4 rounded-lg shadow mb-2 w-full backdrop-filter backdrop-blur-md bg-white/30 border border-white/40"
+            >
+              <div className="flex flex-row w-[100%]">
+                <p className="grow-8 text-left font-Rubik font-light line-through">{error[1]}</p>
+                <p className="grow-1 text-center font-Rubik font-light">➡️</p>
+                <p className="grow-8 text-right font-Rubik font-light">{error[2]}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        )}
+        
+      </div>
+    </div>
+  );
+};
+
+export default ContextAnalysis;
