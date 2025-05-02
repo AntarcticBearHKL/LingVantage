@@ -1,4 +1,4 @@
-<img src="front_end/next_app/public/images/logo.jpg" alt="BlabIt Logo" width="300" />
+<img src="front_end/public/images/logo.jpg" alt="BlabIt Logo" width="300" />
 
 # 🗣️ BlabIt ✨
 
