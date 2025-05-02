@@ -28,7 +28,6 @@ https://balbit.xyz
 ## 🔴 Critical Bugs
 
 - **SECURITY ALERT**: ⚠️ Website certificates have been synchronized to GitHub for development purposes, creating potential security vulnerabilities. This issue will be resolved when certificates expire and are replaced in 90 days.
-- **Cross-Platform Compatibility**: ⚠️Not tested on all devices across platforms. Desktop works well, but iOS devices currently don't function properly.
 
 ## 🐛 Current Issues
 
@@ -37,30 +36,13 @@ https://balbit.xyz
 - Mobile responsiveness needs improvement on smaller screens
 - Backend service occasionally returns malformed JSON responses
 
-## 🔄 Current Development Todo List
+## 🔄 New Update
 
-- Fix iOS device compatibility issues to ensure mobile access works properly
-- Resolve responsive design problems on smaller screens
-- Implement more robust error handling for API connectivity failures
-- Optimize speech recognition for various environmental conditions
-- More language support
+- None
 
-## 🏗️ Architecture
+## 📜 Development Todo List
 
-BlabIt is built with a modern tech stack:
-
-- **Frontend**: Next.js with Redux for state management
-- **Backend**: .NET Core API and azure virture machine
-- **NLP Processing**: Custom language models for enhancement suggestions
-
-## 💫 Contributing
-
-Your creative energy is welcome here! Whether you're a wordsmith, code artisan, or design virtuoso, there's a place for you in our creative collective.
-
-## 📜 License
-
-This project is licensed under the MIT License - see the LICENSE file for celestial details.
-
----
+- Return Home page without returning to first page
+- New Swipe Lib
 
 "Language is the road map of a culture. It tells you where its people come from and where they are going." – Rita Mae Brown
