@@ -110,14 +110,14 @@ export default function MagicCard({ card_info }: MagicCardProps) {
       </div>
 
       {/* 文字层 */}
-      <div className='absolute flex flex-col w-dvw h-dvh font-jaini'>
+      <div className='absolute flex flex-col w-dvw h-dvh font-Rubik'>
         <div className="grow-13"></div>
 
-        <div className="grow-3 text-start align-middle text-2xl px-5">
+        <div className="grow-1 text-start align-middle text-3xl text-[rgb(50,50,50)] font-bold px-2">
           {card_info.title_line_one}
         </div>
 
-        <div className="grow-3 w-full text-center align-middle text-5xl">
+        <div className="grow-3 w-full text-center align-middle font-bold text-5xl">
           {card_info.title_line_two}
         </div>
 
@@ -125,7 +125,7 @@ export default function MagicCard({ card_info }: MagicCardProps) {
 
         <div className="grow-20 flex flex-col bg-white/25 backdrop-blur-xl backdrop-filter backdrop-saturate-150 rounded-2xl px-3 py-3">
 
-          <div className="grow-50 text-xl">
+          <div className="grow-50 font-light text-lg">
             {card_info.description}
           </div>
 

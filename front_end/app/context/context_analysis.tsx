@@ -45,18 +45,12 @@ const ContextAnalysis = () => {
   const possibleScenarios = responses.filter(response => response[0] === "Possible Scenario");
 
   return (
-    <div className="w-full min-h-screen relative">
-      {/* Fixed background image that covers the entire page */}
-      <div 
-        className="fixed inset-0 z-0 opacity-25" 
-        style={{
-          backgroundImage: "url('/images/b.jpg')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          filter: 'contrast(1.1) saturate(1.2)',
-        }}
-      >
-        {/* RGB filter overlay */}
+    <div className="h-dvh w-dvw bg-white overflow-scroll font-jaini">
+      {/* 背景图片 */}
+      <div className="fixed z-0 opacity-25">
+        <img src="/images/b.jpg" alt="Background" className="w-full h-full object-cover" />
+
+        {/* 滤镜 */}
         <div 
           className="absolute inset-0"
           style={{
@@ -67,7 +61,7 @@ const ContextAnalysis = () => {
         ></div>
       </div>
       
-      {/* Content container */}
+      {/* 主题内容 */}
       <div className="relative z-10 flex flex-col items-center w-full">
         {/* Scrollable content area */}
         <div className="flex flex-col w-full max-w-[800px] mx-auto p-6">

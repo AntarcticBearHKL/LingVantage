@@ -4,7 +4,7 @@ export const card_info_context = {
     title_line_one: 'The Context',
     title_line_two: 'Whisperer',
     description: 'Like a gentle breeze carrying the first words of spring, our context generator crafts the perfect opening lines for your conversations. It weaves together phrases and translations, helping you step confidently into any dialogue, as naturally as dawn breaks over the horizon.',
-    button: 'SET THE CONTEXT FOR ME',
+    button: 'DESCRIBE A CONTEXT',
     api_url: '/context',
 }
 
@@ -14,7 +14,7 @@ export const card_info_enchanter = {
     title_line_one: 'English Enhancement',
     title_line_two: 'Enchanter',
     description: 'Your words are precious gems that deserve to shine their brightest. Let us polish them to perfection, revealing their true native brilliance. Grammar, vocabulary, and structure blend together in harmony, as we craft expressions that flow as smoothly as a mountain stream.',
-    button: 'SET THE CONTEXT FOR ME',
+    button: 'GIVE A ENGLISH SPEACH',
     api_url: '/enchanter',
 }
 
@@ -24,6 +24,6 @@ export const card_info_mirror = {
     title_line_one: 'Mother Tongue',
     title_line_two: 'Mirror',
     description: 'Transform your native thoughts into elegant expressions, like watching a butterfly emerge from its chrysalis. Each translation comes adorned with crystalline clarity, while key phrases sparkle with detailed explanations - illuminating your path to understanding like stars in the night sky..',
-    button: 'SET THE CONTEXT FOR ME',
+    button: 'SPEAK YOUR LANGUAGE',
     api_url: '/mirror',
 }
