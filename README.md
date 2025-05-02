@@ -23,12 +23,7 @@ Our spell-crafters are brewing new enchantments to further empower your linguist
 
 ## 🚀 Getting Started
 
-https://blabit.xyz (Macathon Version: unavailable after the closing of the competition)
-
-<u><b>On desktop, users need to click on screen edges to navigate between pages！</b></u>
-<u><b>only desktop avaliable now</b></u>
-
-https://balbit.xyz:5000 (Latest Version)
+https://balbit.xyz 
 
 ## 🔴 Critical Bugs
 

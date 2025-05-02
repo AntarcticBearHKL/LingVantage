@@ -4,6 +4,8 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Kestrel 配置已通过 appsettings.json 自动加载，无需额外代码
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -17,6 +19,9 @@ builder.Services.AddCors(options =>
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+// 添加 HTTPS 重定向中间件
+app.UseHttpsRedirection();
 
 if (app.Environment.IsDevelopment())
 {
