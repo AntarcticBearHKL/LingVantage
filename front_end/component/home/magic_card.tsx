@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { BLABIT_API } from "@/component/const/const";
 
 import { useAudioRecorder } from "@/component/lib/audio_recorder";
-import { setSpeechText } from '@/component/store/reducer/speech'
+import { setSpeechProcess, setSpeechText } from '@/component/store/reducer/speech'
 import { Spin } from 'antd';
 
 // 定义参数接口
@@ -67,13 +67,14 @@ export default function MagicCard({ card_info }: MagicCardProps) {
       body: formData,
     });
 
-    console.log(response.json);
+    console.log(response);
 
     const data = await response.json();
     dispatch(setSpeechText(data.text));
+    dispatch(setSpeechProcess(false));
+
     router.push(card_info.api_url);
     setIsUploading(false);
-
   };
   
   return (
