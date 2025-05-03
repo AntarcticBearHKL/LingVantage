@@ -78,7 +78,7 @@ export default function MagicCard({ card_info }: MagicCardProps) {
   };
   
   return (
-    <div className='w-dvw h-dvh'
+    <div className='w-dvw h-dvh overscroll-none'
       style={{ 
         backgroundColor: card_info.main_color 
       }}

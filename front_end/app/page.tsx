@@ -118,7 +118,7 @@ export default function Home() {
       >
         {pages.map((page) => (
           <SwiperSlide key={page.id}>
-            <div className="w-dvw h-dvh">
+            <div className="w-dvw h-dvh overscroll-none">
               {page.content}
             </div>
           </SwiperSlide>
