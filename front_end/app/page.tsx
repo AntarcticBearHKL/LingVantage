@@ -39,11 +39,24 @@ export default function Home() {
     { key: "vi", label: "Tiếng Việt (dev)", disabled: true },
   ];
 
+  const handleSlideChangeAttempt = (direction: string) => {
+    if (direction === "RIGHT" && swiperRef.current?.isBeginning) {
+      messageApi.warning("This page, gently turned, marks the beginning of our journey.");
+      return false;
+    } else if (direction === "LEFT" && swiperRef.current?.isEnd) {
+      messageApi.loading("More magical cards are being crafted — stay tuned for the wonder ahead!");
+      return false;
+    }
+    return true;
+  };
+
   const handleSwipe = (direction: string) => {
-    if (direction === "LEFT" && swiperRef.current) {
-      swiperRef.current.slideNext();
-    } else if (direction === "RIGHT" && swiperRef.current) {
-      swiperRef.current.slidePrev();
+    if (handleSlideChangeAttempt(direction) && swiperRef.current) {
+      if (direction === "LEFT") {
+        swiperRef.current.slideNext();
+      } else if (direction === "RIGHT") {
+        swiperRef.current.slidePrev();
+      }
     }
   };
 
@@ -52,11 +65,7 @@ export default function Home() {
   };
 
   const handle_carousel_oob = (swiper: SwiperType) => {
-    if (swiper.isBeginning) {
-      messageApi.warning("This page, gently turned, marks the beginning of our journey.");
-    } else if (swiper.isEnd) {
-      messageApi.loading("More magical cards are being crafted — stay tuned for the wonder ahead!");
-    }
+    // No longer showing messages just for being at boundaries
   };
 
   return (
@@ -94,14 +103,16 @@ export default function Home() {
       <div className="fixed left-0 top-0 w-1/4 h-dvh z-5"
         onClick={() => handle_side_click("RIGHT")}
         style={{ opacity: 0 }}
-      ></div>
+      >
+      </div>
       
 
       {/* 右侧点击区域 */}
       <div className="fixed right-0 top-0 w-1/4 h-dvh z-5"
         onClick={() => handle_side_click("LEFT")}
         style={{ opacity: 0 }}
-      ></div>
+      >
+      </div>
 
       {/* 页面内容部分 - 使用 Swiper */}
       <Swiper

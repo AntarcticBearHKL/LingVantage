@@ -112,7 +112,7 @@ export default function MagicCard({ card_info }: MagicCardProps) {
       <div className='absolute flex flex-col w-dvw h-dvh font-Rubik'>
         <div className="grow-16"></div>
 
-        <div className="grow-1 text-start align-middle text-3xl text-[rgb(50,50,50)] font-bold px-2">
+        <div className="bold-title-line">
           {card_info.title_line_one}
         </div>
 
