@@ -69,7 +69,7 @@ export default function Home() {
   };
 
   return (
-    <div className="fixed flex flex-col h-dvh w-dvw select-none overscroll-none overflow-hidden">
+    <div className="fixed flex flex-col h-dvh w-dvw select-none overflow-scroll">
 
 
       {/* 上方提醒 */}
@@ -137,7 +137,7 @@ export default function Home() {
       >
         {pages.map((page) => (
           <SwiperSlide key={page.id}>
-            <div className="w-dvw h-dvh overscroll-none">
+            <div className="w-dvw h-dvh">
               {page.content}
             </div>
           </SwiperSlide>
