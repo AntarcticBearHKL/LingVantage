@@ -1,10 +1,17 @@
 "use client"
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 
-import { Carousel, Drawer, Dropdown, message } from "antd";
+import { Drawer, Dropdown, message } from "antd";
 import type { MenuProps } from "antd";
-import type { CarouselRef } from "antd/es/carousel";
+
+// Import Swiper components and styles
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, EffectFade } from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/effect-fade';
 
 import MagicCard from "@/component/home/magic_card";
 
@@ -13,7 +20,7 @@ import * as CardInfo from "@/component/const/card_info";
 export default function Home() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
-  const carouselRef = useRef<CarouselRef>(null);
+  const swiperRef = useRef<SwiperType | null>(null);
 
   const pages = [
     { id: 0, content: <MagicCard card_info={CardInfo.card_info_context}/> },
@@ -31,10 +38,10 @@ export default function Home() {
   ];
 
   const handleSwipe = (direction: string) => {
-    if (direction === "LEFT") {
-      carouselRef.current?.next();
-    } else if (direction === "RIGHT") {
-      carouselRef.current?.prev();
+    if (direction === "LEFT" && swiperRef.current) {
+      swiperRef.current.slideNext();
+    } else if (direction === "RIGHT" && swiperRef.current) {
+      swiperRef.current.slidePrev();
     }
   };
 
@@ -42,11 +49,10 @@ export default function Home() {
     handleSwipe(direction);
   };
 
-  const handle_carousel_oob = (current: number, next: number) => {
-    // Only show messages when trying to navigate beyond the first or last page
-    if (current === 0 && next === 0) {
+  const handle_carousel_oob = (swiper: SwiperType) => {
+    if (swiper.isBeginning) {
       messageApi.warning("This page, gently turned, marks the beginning of our journey.");
-    } else if (current === pages.length - 1 && next === pages.length - 1) {
+    } else if (swiper.isEnd) {
       messageApi.loading("More magical cards are being crafted — stay tuned for the wonder ahead!");
     }
   };
@@ -61,25 +67,24 @@ export default function Home() {
 
       {/* 顶部栏目 */}
       <div className="fixed top-0 left-0 h-[10%] w-dvw flex justify-between items-center px-5 py-4 z-10">
+
         {/* 语言选择下拉菜单 */}
-        <div>
-          <Dropdown 
-            menu={{ items: menu_items }} 
-            placement="bottomLeft"
-          >
-            <div className="backdrop-blur-md bg-white/20 text-white rounded-full cursor-pointer shadow-sm px-4 py-2 ">
-              Language 🌐
-            </div>
-          </Dropdown>
-        </div>
+        <Dropdown 
+          menu={{ items: menu_items }} 
+          placement="bottomLeft"
+        >
+          <div className="backdrop-blur-md bg-white/20 text-white rounded-full cursor-pointer shadow-sm px-4 py-2 ">
+            Language 🌐
+          </div>
+        </Dropdown>
 
         {/* 设置按钮 */}  
-        <div 
+        <div className="px-4 py-2 backdrop-blur-md bg-white/20 text-white rounded-full cursor-pointer shadow-sm"
           onClick={() => setDrawerOpen(true)} 
-          className="px-4 py-2 backdrop-blur-md bg-white/20 text-white rounded-full cursor-pointer shadow-sm"
         >
           <span>⚙️</span>
         </div>
+
       </div>
 
 
@@ -96,24 +101,27 @@ export default function Home() {
         style={{ opacity: 0 }}
       ></div>
 
-
-      {/* 页面内容部分 */}
-      <Carousel 
-        ref={carouselRef}
-        dots={false}
-        infinite={false}
-        beforeChange={handle_carousel_oob}
+      {/* 页面内容部分 - 使用 Swiper */}
+      <Swiper
+        modules={[Navigation, EffectFade]}
+        onSwiper={(swiper) => { swiperRef.current = swiper; }}
+        onReachBeginning={(swiper) => handle_carousel_oob(swiper)}
+        onReachEnd={(swiper) => handle_carousel_oob(swiper)}
         className="w-dvw h-dvh overflow-hidden"
-        effect="scrollx"
-        draggable={true}
+        effect="slide"
+        slidesPerView={1}
+        threshold={5}
+        resistance={true}
+        resistanceRatio={0.85}
       >
         {pages.map((page) => (
-          <div key={page.id} className="w-dvw h-dvh">
-            {page.content}
-          </div>
+          <SwiperSlide key={page.id}>
+            <div className="w-dvw h-dvh">
+              {page.content}
+            </div>
+          </SwiperSlide>
         ))}
-      </Carousel>
-
+      </Swiper>
 
       {/* 登录抽屉 */}
       <Drawer
@@ -141,7 +149,6 @@ export default function Home() {
         <h3 className="text-lg font-semibold">Login</h3>
         <p>Your may input your openai api later (dev)</p>
       </Drawer>
-
 
     </div>
   );
