@@ -108,7 +108,7 @@ export default function Home() {
 
 
       {/* 左侧点击区域 */}
-      <div className="fixed left-0 top-0 w-1/4 h-dvh z-5"
+      <div className="fixed left-0 top-0 w-1/8 h-dvh z-5"
         onClick={() => handle_side_click("RIGHT")}
         style={{ opacity: 0 }}
       >
@@ -116,7 +116,7 @@ export default function Home() {
       
 
       {/* 右侧点击区域 */}
-      <div className="fixed right-0 top-0 w-1/4 h-dvh z-5"
+      <div className="fixed right-0 top-0 w-1/8 h-dvh z-5"
         onClick={() => handle_side_click("LEFT")}
         style={{ opacity: 0 }}
       >
