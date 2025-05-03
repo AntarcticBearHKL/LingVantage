@@ -22,11 +22,13 @@ export default function Home() {
   const [messageApi, contextHolder] = message.useMessage();
   const swiperRef = useRef<SwiperType | null>(null);
 
+
   const pages = [
     { id: 0, content: <MagicCard card_info={CardInfo.card_info_context}/> },
     { id: 1, content: <MagicCard card_info={CardInfo.card_info_enchanter}/> },
     { id: 2, content: <MagicCard card_info={CardInfo.card_info_mirror}/> },
   ];
+
 
   const menu_items: MenuProps["items"] = [
     { key: "en", label: "English", },
@@ -58,7 +60,7 @@ export default function Home() {
   };
 
   return (
-    <div className="fixed flex flex-col h-dvh w-dvw select-none">
+    <div className="fixed flex flex-col h-dvh w-dvw select-none overscroll-none">
 
 
       {/* 上方提醒 */}
