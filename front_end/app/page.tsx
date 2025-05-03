@@ -60,7 +60,7 @@ export default function Home() {
   };
 
   return (
-    <div className="fixed flex flex-col h-dvh w-dvw select-none overscroll-none">
+    <div className="fixed flex flex-col h-dvh w-dvw select-none overscroll-none overflow-hidden">
 
 
       {/* 上方提醒 */}
