@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useDispatch } from 'react-redux'
 import { useState } from 'react';
+import { motion } from "framer-motion";
 
 import { BLABIT_API } from "@/component/const/const";
 
@@ -130,13 +131,20 @@ export default function MagicCard({ card_info }: MagicCardProps) {
 
           <div className="grow-10"></div>
 
-          <button className='grow-30 w-full bg-black text-center align-middle text-xl'
+          <motion.button 
+            className='grow-30 w-full bg-black text-center align-middle text-xl rounded-3xl'
             onClick={handler_record}
             disabled={isProcessing}
             style={{ color: card_info.main_color }}
+            whileTap={{ scale: 0.75 }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 400, 
+              damping: 17 
+            }}
           >
             {isProcessing ? 'PROCESSING...' : isRecording ? 'STOP RECORDING' : card_info.button}
-          </button>
+          </motion.button>
 
           <div className="grow-20"></div>
         </div>
